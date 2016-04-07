@@ -1,7 +1,12 @@
 module.exports = function(grunt){
   grunt.initConfig({
     uglify: {
-      'public/app.min.js': ['public/javascripts/*.js', 'public/javascripts/models/*.js', 'public/javascripts/controllers/*.js', 'public/javascripts/views/*.js'],
+      'public/app.min.js': [
+        'public/javascripts/*.js',
+        'public/javascripts/templates/*.js',
+        'public/javascripts/models/*.js',
+        'public/javascripts/views/*.js', 
+        'public/javascripts/routers/*.js']
     },
     watch: {
       javascript: {

@@ -1,0 +1,1 @@
+ParticleFire.Templates.Loader = '<span>LOADING&nbsp;&nbsp;&nbsp;<i class="fa fa-fire fa-spin"></i></span>';
