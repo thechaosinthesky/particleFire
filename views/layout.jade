@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/bootstrap/superhero.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css')
+    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/stylesheets/styles.css')
+    link(rel="stylesheet", href="app.css")
+
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a#brand.navbar-brand
+            span particle
+            span.white Fire
+            i.primary-color.fa.fa-fire
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/') Home
+            li
+              a(href='/settings') Settings
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/sign_out') Logout    
+          p.navbar-text.navbar-right Welcome Brad&nbsp;&nbsp;&nbsp;   
+    #main.container.container-main
+      block content
+    .footer-wrapper
+      .footer-content
+        p
+          | &copy; 2016
+          | &nbsp;
+          a.light-grey Brad Carlson
+
+    script(src='/mithril/mithril.min.js')
+    script(src='//cdn.jsdelivr.net/sparkjs/0.5.9/spark.min.js')
+    script(src='/app.min.js')
+
+    block scripts
+
+    
+    

@@ -1,0 +1,70 @@
+extends layout
+
+block content
+  h1= title
+
+block scripts
+  script.
+    var form = {
+        getData: function() {
+            return {name: m.prop(""), age: m.prop(""), saved: m.prop(false), error: m.prop("")};
+        },
+        setData: function(data) {
+          console.log(data);
+          data.saved("WOWsers");
+
+          //- return m.request({method: "POST", url: "/user", data: {name: data.name(), age: data.age()}})
+          //-   .then(data.saved("WOWsers"));
+          //-   //- // .then(data.saved.bind(this, true), data.error);
+
+
+        }
+    };
+
+    form.controller = function() {
+      var that = this;
+      this.data = form.getData();
+
+      this.setSaved = function() {
+        that.data.saved("woow")
+      }
+
+      this.save = function() {
+          form.setData(this.data);
+      }.bind(this);
+    };
+
+    var ref;
+    form.view = function(ctrl) {
+      ref = ctrl;
+      return m("form", [
+          m("input[placeholder=name]", {oninput: m.withAttr("value", ctrl.data.name)}, ctrl.data.name()),
+          m("input[placeholder=age]", {oninput: m.withAttr("value", ctrl.data.age)}, ctrl.data.age()),
+          m("span", {onclick: ctrl.setSaved}, "Save"),
+          ctrl.data.saved() ? "Saved!" : "",
+          ctrl.data.error() || "MAJOR ERROR HERE"
+      ]);
+    };
+
+    //- m.module(document, form);
+    m.mount(document.getElementById("main"), form);
+
+    setTimeout(function(){
+      //- console.log(form.controller());
+      //- console.log(form.controller());
+      console.log(ref);
+      //- form.controller().data.saved("WOWsers")
+      //- ref.data.saved("WOWsers")
+      ref.data.saved("WOWsers");
+      ref.setSaved();
+    }, 2000);
+
+
+
+  //- #spark-login
+  //- script(src='//cdn.jsdelivr.net/sparkjs/0.5.9/spark.min.js')  
+  //- script.
+  //-   sparkLogin(function(data) {
+  //-     console.log(data);
+  //-     app.login(data.access_token);
+  //-   });

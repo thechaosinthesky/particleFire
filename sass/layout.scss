@@ -1,0 +1,16 @@
+.container-main{
+	min-height:500px;
+}
+
+.footer-wrapper{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+
+	.footer-content{
+		text-align:right;
+		font-size:10px;
+		padding-right:15px;
+	}
+}

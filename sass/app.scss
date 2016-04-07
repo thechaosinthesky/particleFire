@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+@import "layout";
+@import "spark";
+@import "profiles";
+@import "ios";
+
+body {
+  padding:72px 0 0 0;
+  font: Helvetica, Arial, sans-serif;
+  background-color:$very-dark;
+}
+
+.container{
+	width:auto;
+	margin-left:20px;
+	margin-right:20px;
+}
+
+.table{
+	tr{
+		background-color:$dark;
+	}
+}
+
+.primary-color{ color:$primary-color }
+.color1{ color:$color1 }
+.color2{ color:$color2 }
+.color3{ color:$color3 }
+.color4{ color:$color4 }
+.color5{ color:$color5 }
+.white{ color:#FFF }
+.light-grey{ color:$light-grey }

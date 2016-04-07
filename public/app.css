@@ -1,0 +1,106 @@
+.container-main {
+  min-height: 500px; }
+
+.footer-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+  .footer-wrapper .footer-content {
+    text-align: right;
+    font-size: 10px;
+    padding-right: 15px; }
+
+#spark-login-button.spark-login-button {
+  color: #ffffff;
+  background-color: #df691a;
+  border-color: transparent;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 16px;
+  font-size: 15px;
+  line-height: 1.42857143;
+  border-radius: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+#ios {
+  background-color: #4e5d6c; }
+  #ios td {
+    border-top: 0; }
+  #ios .cell-io-name {
+    width: 150px;
+    background-color: #FFF;
+    color: #2b3e50; }
+  #ios .cell-io-content {
+    padding: 10px 15px; }
+  #ios tr:first-child .cell-io-name {
+    border-top-right-radius: 10px; }
+  #ios tr:last-child {
+    background-color: #272b30; }
+    #ios tr:last-child .cell-io-name {
+      border-bottom-right-radius: 10px;
+      padding-top: 15px; }
+    #ios tr:last-child .cell-io-content {
+      background: none; }
+  #ios tr:nth-child(1) .cell-io-name .fa {
+    color: #2b3e50; }
+  #ios tr:nth-child(2) .cell-io-name .fa {
+    color: #2a9fd6; }
+  #ios tr:nth-child(3) .cell-io-name .fa {
+    color: #77b300; }
+  #ios tr:nth-child(4) .cell-io-name .fa {
+    color: #9933cc; }
+  #ios tr:nth-child(5) .cell-io-name .fa {
+    color: #cc0000; }
+  #ios .btn-new-io {
+    display: block;
+    width: auto; }
+
+body {
+  padding: 72px 0 0 0;
+  font: Helvetica, Arial, sans-serif;
+  background-color: #272b30; }
+
+.container {
+  width: auto;
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.table tr {
+  background-color: #2b3e50; }
+
+.primary-color {
+  color: #df691a; }
+
+.color1 {
+  color: #2b3e50; }
+
+.color2 {
+  color: #2a9fd6; }
+
+.color3 {
+  color: #77b300; }
+
+.color4 {
+  color: #9933cc; }
+
+.color5 {
+  color: #cc0000; }
+
+.white {
+  color: #FFF; }
+
+.light-grey {
+  color: #CCC; }

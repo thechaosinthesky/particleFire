@@ -1,0 +1,54 @@
+#ios{
+	background-color:$primary-bg-color;
+
+	td{
+		border-top:0;
+	}
+
+	.cell-io-name{
+		width:150px;
+		background-color:#FFF;
+		color: $dark;
+	}
+
+	.cell-io-content{
+		padding:10px 15px;
+	}
+
+	tr:first-child .cell-io-name{
+		border-top-right-radius: 10px;
+	}
+
+	tr:last-child{
+		background-color:$very-dark;
+
+		.cell-io-name{
+			border-bottom-right-radius: 10px;
+			padding-top:15px;
+		}
+		.cell-io-content{
+			background:none;
+		}
+	}
+
+	tr:nth-child(1) .cell-io-name .fa{
+		color:$color1;
+	}
+	tr:nth-child(2) .cell-io-name .fa{
+		color:$color2;
+	}
+	tr:nth-child(3) .cell-io-name .fa{
+		color:$color3;
+	}
+	tr:nth-child(4) .cell-io-name .fa{
+		color:$color4;
+	}
+	tr:nth-child(5) .cell-io-name .fa{
+		color:$color5;
+	}
+
+	.btn-new-io{
+		display:block;
+		width:auto;
+	}
+}
