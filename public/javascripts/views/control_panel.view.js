@@ -1,4 +1,5 @@
 ParticleFire.Views.ControlPanel = Backbone.View.extend({
+
   events: {
     "click .add-profile": "addProfile"
   },
@@ -8,11 +9,16 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     this.collection = ParticleFire.App.profiles;
     this.listenTo(this.collection,'sync', this.render);
 
+    this.templates = {
+      profileTab: _.template(ParticleFire.Templates.ProfileTab)
+    }
+
     this.render();
   },
 
   render: function() {
     if(this.collection.length > 0){
+      this.$profileList.html('');
       this.renderAllProfiles();
     }
     else{
@@ -20,15 +26,19 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     }
   },
 
+  loadProfiles: function() {
+    this.collection.fetch();
+  },
+
   renderAllProfiles: function(){
     var that = this;
-    _.each(this.collection, function(model){
+    _.each(this.collection.models, function(model){
       that.renderProfile(model);
     }); 
   },
 
   renderProfile: function(model){
-    this.$('.profile-list').append('<div>COOOOOl</div>');
+    this.$('.profile-list').append(this.templates.profileTab(model.toJSON()));
   },
 
   addProfile: function() {

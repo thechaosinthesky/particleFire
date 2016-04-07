@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  #profiles
-    .profile-tabs
-      button.btn.btn-primary.pull-right
-        i.fa.fa-plus-circle
-        | &nbsp; 
-        | PROFILE
-      ul.nav.nav-tabs.profile-list(role='tablist')
+  .row
+    .col-xs-12
+      #profiles
+        .profile-tabs
+          button.btn.btn-primary.pull-right
+            i.fa.fa-plus-circle
+            | &nbsp; 
+            | PROFILE
+          ul.nav.nav-tabs.profile-list(role='tablist')
 
 block scripts
   script.
