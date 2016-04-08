@@ -43,23 +43,29 @@
     width: 150px;
     background-color: #FFF;
     color: #2b3e50; }
+  #ios .cell-io-new .fa {
+    color: #FFF !important; }
   #ios .cell-io-content {
     padding: 10px 15px; }
-  #ios tr:first-child .cell-io-name {
+  #ios tbody tr:first-child .cell-io-name {
     border-top-right-radius: 10px; }
-  #ios tr:last-child {
+  #ios tfoot tr {
     background-color: #272b30; }
-    #ios tr:last-child .cell-io-name {
-      border-bottom-right-radius: 10px;
-      padding-top: 15px; }
-    #ios tr:last-child .cell-io-content {
+    #ios tfoot tr td.cell-io-new {
+      background-color: #272b30;
+      padding: 0; }
+      #ios tfoot tr td.cell-io-new .io-new {
+        background-color: #FFF;
+        border-bottom-right-radius: 10px;
+        padding: 6px; }
+    #ios tfoot tr .cell-io-content {
       background: none; }
   #ios tr:nth-child(1) .cell-io-name .fa {
-    color: #2b3e50; }
+    color: #77b300; }
   #ios tr:nth-child(2) .cell-io-name .fa {
     color: #2a9fd6; }
   #ios tr:nth-child(3) .cell-io-name .fa {
-    color: #77b300; }
+    color: #2b3e50; }
   #ios tr:nth-child(4) .cell-io-name .fa {
     color: #9933cc; }
   #ios tr:nth-child(5) .cell-io-name .fa {
@@ -85,13 +91,13 @@ body {
   color: #df691a; }
 
 .color1 {
-  color: #2b3e50; }
+  color: #77b300; }
 
 .color2 {
   color: #2a9fd6; }
 
 .color3 {
-  color: #77b300; }
+  color: #2b3e50; }
 
 .color4 {
   color: #9933cc; }

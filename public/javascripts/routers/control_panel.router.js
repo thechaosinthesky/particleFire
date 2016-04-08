@@ -1,16 +1,17 @@
 ParticleFire.Routers.ControlPanel = Backbone.Router.extend({
 
   routes: {
+    "": "initRoute", 
     "control-panel": "load"   // #help
     // "search/:query/p:page": "search"   // #search/kiwis/p7
   },
 
   initialize: function(options) {
-    this.profile_id = null;
-    this.io_id = null;
-
     Backbone.history.start();
-    this.navigate("control-panel");
+  },
+
+  initRoute: function() {
+    this.navigate("control-panel", {trigger: true, replace: true});
   },
 
   load: function() {

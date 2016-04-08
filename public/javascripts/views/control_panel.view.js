@@ -4,13 +4,17 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     "click .add-profile": "addProfile"
   },
 
-  initialize: function() {
+  initialize: function(options) {
+    this.profile_id = options.profile_id;
     this.$profileList = this.$('.profile-list');
+    this.$profileListContent = this.$('.profile-tab-content');
     this.collection = ParticleFire.App.profiles;
+    this.profileViews = [];
     this.listenTo(this.collection,'sync', this.render);
 
     this.templates = {
-      profileTab: _.template(ParticleFire.Templates.ProfileTab)
+      profileTab: _.template(ParticleFire.Templates.ProfileTab),
+      profileContent: _.template(ParticleFire.Templates.TabProfileContent)
     }
 
     this.render();
@@ -18,11 +22,14 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
 
   render: function() {
     if(this.collection.length > 0){
+      if(!this.profile_id){
+        this.profile_id = this.collection.at(0).id;
+      }
       this.$profileList.html('');
       this.renderAllProfiles();
     }
     else{
-      this.$profileList.html(ParticleFire.Templates.Loader);
+      this.$profileList.html(ParticleFire.Templates.Loader_Profiles);
     }
   },
 
@@ -38,7 +45,19 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
   },
 
   renderProfile: function(model){
-    this.$('.profile-list').append(this.templates.profileTab(model.toJSON()));
+    var obj = model.toJSON();
+    var profileContentId = "profile-" + model.id;
+    var active = (obj.id == this.profile_id);
+    obj["profile_content_id"] = profileContentId;
+    obj["classes"] = active ? 'active' : '';
+    obj["active"] = active;
+    this.$profileList.append(this.templates.profileTab(obj));
+    this.$profileListContent.append(this.templates.profileContent(obj));
+    var profileView = new ParticleFire.Views.Profile({el:"#" + profileContentId, model: model});
+    this.profileViews.push(profileView); 
+    if(active){
+      profileView.activate();
+    }
   },
 
   addProfile: function() {

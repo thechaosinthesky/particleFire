@@ -7,9 +7,9 @@ ParticleFire.Models.IO = Backbone.Model.extend({
 ParticleFire.Collections.IO = Backbone.Collection.extend({
   model: ParticleFire.Models.IO,
   url: function() {
-    return '/profiles/' + this.model.id + '/io';
+    return '/profiles/' + this.profile_id + '/io';
   },
-  initialize: function() {
-
+  initialize: function(options) {
+  	this.profile_id = options.profile_id;
   }
 });
