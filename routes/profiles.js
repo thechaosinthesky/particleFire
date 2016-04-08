@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var tempProfiles1 = [];
+
 var tempProfiles = [
 	{
 		"id": 1,
@@ -11,6 +13,8 @@ var tempProfiles = [
 		"name": "Brewing"
 	}
 ];
+
+var tempIOs1 = [];
 
 var tempIOs = [
 	{

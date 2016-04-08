@@ -15,17 +15,18 @@ ParticleFire.Views.Profile = Backbone.View.extend({
       IO: _.template(ParticleFire.Templates.IO)
     }
 
-    this.render();
+    this.renderLoader();
+  },
+
+  renderLoader: function() {
+    var obj = this.model.toJSON();
+    this.$el.html(this.templates.profile(obj));
+    this.$IOList = this.$('.io-list');
   },
 
   render: function() {
-    var obj = this.model.toJSON();
-    console.log(this.$el);
-    
-    this.$el.html(this.templates.profile(obj));
-    this.$IOList = this.$('.io-list');
+    this.$IOList.html('');
     if(this.collection.length > 0){
-      this.$IOList.html('');
       this.renderAllIOs();
     }
   },

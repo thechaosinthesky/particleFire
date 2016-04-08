@@ -17,23 +17,25 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
       profileContent: _.template(ParticleFire.Templates.TabProfileContent)
     }
 
-    this.render();
+    this.$profileList.html(ParticleFire.Templates.Loader_Profiles);
   },
 
   render: function() {
+    this.$profileList.html('');
     if(this.collection.length > 0){
       if(!this.profile_id){
         this.profile_id = this.collection.at(0).id;
       }
-      this.$profileList.html('');
       this.renderAllProfiles();
     }
     else{
-      this.$profileList.html(ParticleFire.Templates.Loader_Profiles);
+      this.$profileListContent.append(ParticleFire.Templates.NoProfiles);
     }
   },
 
   loadProfiles: function() {
+    var that = this;
+    
     this.collection.fetch();
   },
 

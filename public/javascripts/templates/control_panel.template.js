@@ -10,6 +10,12 @@ ParticleFire.Templates.ProfileTab = '
 </li>\
 ';
 
+ParticleFire.Templates.NoProfiles = '
+<div class="well">\
+<p>You haven\'t added any profiles yet.</p>\
+</div>\
+';
+
 ParticleFire.Templates.TabProfileContent = '
 <div role="tabpanel" class="tab-pane <%= classes %>" id="<%= profile_content_id %>">\
 </div>\
