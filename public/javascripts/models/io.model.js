@@ -1,4 +1,13 @@
 ParticleFire.Models.IO = Backbone.Model.extend({
+
+	types:[
+		{"value":"trigger", "label":"Trigger"},
+		{"value":"toggle", "label":"Toggle"},
+		{"value":"power_buttons", "label":"Power Buttons"},
+		{"value":"reading", "label":"Value Reading"},
+		{"value":"video", "label":"Video Feed"}
+	],
+
   initialize: function() {
 
   }

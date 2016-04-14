@@ -19,27 +19,33 @@ var tempIOs1 = [];
 var tempIOs = [
 	{
 		"id": 1,
-		"name": "Garage"
+		"name": "Garage",
+		"type": "trigger"
 	},
 	{
 		"id": 2,
-		"name": "Beer fridge"
+		"name": "Beer fridge",
+		"type": "trigger"
 	},
 	{
 		"id": 3,
-		"name": "Sprinklers"
+		"name": "Sprinklers",
+		"type": "trigger"
 	},
 	{
 		"id": 4,
-		"name": "Dishwasher"
+		"name": "Dishwasher",
+		"type": "trigger"
 	},
 	{
 		"id": 5,
-		"name": "Front door"
+		"name": "Front door",
+		"type": "trigger"
 	},
 	{
 		"id": 6,
-		"name": "Back door"
+		"name": "Back door",
+		"type": "trigger"
 	}
 ];
 

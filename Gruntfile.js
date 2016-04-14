@@ -3,6 +3,7 @@ module.exports = function(grunt){
     uglify: {
       'public/app.min.js': [
         'public/javascripts/*.js',
+        'public/javascripts/widgets/*.js',
         'public/javascripts/templates/*.js',
         'public/javascripts/models/*.js',
         'public/javascripts/views/*.js', 

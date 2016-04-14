@@ -38,15 +38,24 @@
 #ios {
   background-color: #4e5d6c; }
   #ios td {
-    border-top: 0; }
+    border-top: 0;
+    padding: 10px 15px; }
   #ios .cell-io-name {
     width: 150px;
     background-color: #FFF;
     color: #2b3e50; }
-  #ios .cell-io-new .fa {
-    color: #FFF !important; }
   #ios .cell-io-content {
     padding: 10px 15px; }
+  #ios tbody td.cell-io-name .io-edit {
+    display: none; }
+  #ios tbody td.cell-io-name:hover {
+    cursor: pointer;
+    background-color: #4e5d6c;
+    color: #FFF; }
+    #ios tbody td.cell-io-name:hover .io-edit {
+      display: inline; }
+    #ios tbody td.cell-io-name:hover .fa {
+      color: #FFF; }
   #ios tbody tr:first-child .cell-io-name {
     border-top-right-radius: 10px; }
   #ios tfoot tr {
@@ -58,6 +67,8 @@
         background-color: #FFF;
         border-bottom-right-radius: 10px;
         padding: 6px; }
+        #ios tfoot tr td.cell-io-new .io-new .fa {
+          color: #FFF !important; }
     #ios tfoot tr .cell-io-content {
       background: none; }
   #ios tr:nth-child(1) .cell-io-name .fa {
@@ -110,3 +121,9 @@ body {
 
 .light-grey {
   color: #CCC; }
+
+.btn-dark {
+  background-color: #485563; }
+
+.modal-buttons .btn {
+  margin-left: 10px; }

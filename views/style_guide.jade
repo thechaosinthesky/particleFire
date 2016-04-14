@@ -1,63 +1,65 @@
 extends layout
 
 block content
-  #profiles
-    .profile-tabs
-      button.btn.btn-primary.pull-right
-        i.fa.fa-plus-circle
-        | &nbsp; 
-        | PROFILE
-      ul.nav.nav-tabs(role='tablist')
-        li.active(role='presentation')
-          a(href='#profile1', aria-controls='profile1', role='tab', data-toggle='tab') House
-        li(role='presentation')
-          a(href='#profile2', aria-controls='profile2', role='tab', data-toggle='tab') Brewing  
-    .tab-content
-      #profile1.tab-pane.active(role='tabpanel') 
-        table#ios.table.table-striped
-          tr
-            td.cell-io-name.active 
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Garage
-            td.cell-io-content Open/Closed  
-          tr
-            td.cell-io-name 
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Dishwasher
-            td.cell-io-content On/Off  
-          tr
-            td.cell-io-name
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Sprinklers
-            td.cell-io-content On/Off 
-          tr
-            td.cell-io-name
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Front Door
-            td.cell-io-content Locked/Unlocked 
-          tr
-            td.cell-io-name
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Back Door
-            td.cell-io-content Locked/Unlocked 
-          tr
-            td.cell-io-name
-              i.fa.fa-gg
-              | &nbsp;&nbsp; 
-              | Living room light
-            td.cell-io-content On/Off  
-          tr
-            td.cell-io-name.text-center
-              #newIO.btn-new-io.btn.btn-primary
-                i.fa.fa-plus-circle
-                | &nbsp; 
-                | I/O
-            td.cell-io-content  
-      #profile2.tab-pane(role='tabpanel') ...   
-      #new.tab-pane(role='tabpanel') ...
+  .row
+    .col-xs-12
+      #profiles
+        .profile-tabs
+          button.btn.btn-primary.pull-right
+            i.fa.fa-plus-circle
+            | &nbsp; 
+            | PROFILE
+          ul.nav.nav-tabs(role='tablist')
+            li.active(role='presentation')
+              a(href='#profile1', aria-controls='profile1', role='tab', data-toggle='tab') House
+            li(role='presentation')
+              a(href='#profile2', aria-controls='profile2', role='tab', data-toggle='tab') Brewing  
+        .tab-content
+          #profile1.tab-pane.active(role='tabpanel') 
+            table#ios.table.table-striped
+              tr
+                td.cell-io-name.active 
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Garage
+                td.cell-io-content Open/Closed  
+              tr
+                td.cell-io-name 
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Dishwasher
+                td.cell-io-content On/Off  
+              tr
+                td.cell-io-name
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Sprinklers
+                td.cell-io-content On/Off 
+              tr
+                td.cell-io-name
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Front Door
+                td.cell-io-content Locked/Unlocked 
+              tr
+                td.cell-io-name
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Back Door
+                td.cell-io-content Locked/Unlocked 
+              tr
+                td.cell-io-name
+                  i.fa.fa-gg
+                  | &nbsp;&nbsp; 
+                  | Living room light
+                td.cell-io-content On/Off  
+              tr
+                td.cell-io-name.text-center
+                  #newIO.btn-new-io.btn.btn-primary
+                    i.fa.fa-plus-circle
+                    | &nbsp; 
+                    | I/O
+                td.cell-io-content  
+          #profile2.tab-pane(role='tabpanel') ...   
+          #new.tab-pane(role='tabpanel') ...
 

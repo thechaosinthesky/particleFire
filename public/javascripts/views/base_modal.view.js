@@ -1,0 +1,30 @@
+ParticleFire.Views.Modal = Backbone.View.extend({
+
+	header: "Great template",
+	contentTemplate: _.template("Hi, How ya doin?"),
+	modalTemplate: _.template(ParticleFire.Templates.Modal),
+
+  events: {
+  },
+
+  initialize: function(options) {
+
+    this.render();
+  },
+
+  render: function(contentObj) {
+  	var obj = {};
+  	obj.header = this.header;
+  	this.$content = $(this.modalTemplate(obj));
+  	this.$modalBody = this.$content.find('.modal-body');
+  	this.$modalBody.html(this.contentTemplate(contentObj));
+
+  	this.$content.modal();
+
+  	this.onRender();
+  },
+
+  onRender: function() {
+
+  }
+});

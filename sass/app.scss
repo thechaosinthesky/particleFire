@@ -31,3 +31,13 @@ body {
 .color5{ color:$color5 }
 .white{ color:#FFF }
 .light-grey{ color:$light-grey }
+
+.btn-dark{
+	background-color:$bg-accent;
+}
+
+.modal-buttons{
+	.btn {
+		margin-left:10px;
+	}
+}

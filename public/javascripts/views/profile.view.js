@@ -9,6 +9,7 @@ ParticleFire.Views.Profile = Backbone.View.extend({
     this.active = false;
     this.collection = new ParticleFire.Collections.IO([], {profile_id: this.model.id});
     this.listenTo(this.collection,'sync', this.render);
+    this.ioViews = [];
 
     this.templates = {
       profile: _.template(ParticleFire.Templates.Profile),
@@ -48,8 +49,10 @@ ParticleFire.Views.Profile = Backbone.View.extend({
   },
 
   renderIO: function(model){
-    var obj = model.toJSON();
-    this.$IOList.append(this.templates.IO(obj));
+    this.ioViews.push(new ParticleFire.Views.IO({model: model, $parentEl:this.$IOList}));
+
+    // var obj = model.toJSON();
+    // this.$IOList.append(this.templates.IO(obj));
   },
 
   addIO: function() {
