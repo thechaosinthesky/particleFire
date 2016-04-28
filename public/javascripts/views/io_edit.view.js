@@ -10,12 +10,6 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     video: _.template(ParticleFire.Templates.IOEditType_trigger)
   },
 
-  ioFieldDefaults: {
-    device_name: '',
-    input_pin: '',
-    output_pin: ''
-  },
-
   events: {
   },
 
@@ -40,13 +34,7 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
   },
 
   renderIOFields: function(type) {
-    this.model.set({"device_name": "Aragon"}, {silent: true});
-
-    this.$ioFields.html(this.ioTypeTemplates[type](this.getFieldsObj()));
-  },
-
-  getFieldsObj: function(){
-    return $.extend({}, this.ioFieldDefaults, this.model.toJSON());
+    this.$ioFields.html(this.ioTypeTemplates[type](this.model.toJSON()));
   }
 
 });

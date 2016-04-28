@@ -8,6 +8,14 @@ ParticleFire.Models.IO = Backbone.Model.extend({
 		{"value":"video", "label":"Video Feed"}
 	],
 
+  defaults: {
+    name: '',
+    type: null,
+    device_name: '',
+    input_pin: '',
+    output_pin: ''
+  },
+
   initialize: function() {
 
   }

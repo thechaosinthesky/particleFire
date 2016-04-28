@@ -20,12 +20,14 @@ var tempIOs = [
 	{
 		"id": 1,
 		"name": "Garage",
-		"type": "trigger"
+		"type": "trigger",
+		"device_name": "Aragon"
 	},
 	{
 		"id": 2,
 		"name": "Beer fridge",
-		"type": "trigger"
+		"type": "trigger",
+		"device_name": "Boromir"
 	},
 	{
 		"id": 3,
