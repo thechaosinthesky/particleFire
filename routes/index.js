@@ -1,6 +1,6 @@
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
+var passport = require('passport');
 
 /* GET style guide. */
 router.get('/style_guide', function(req, res, next) {
@@ -9,7 +9,7 @@ router.get('/style_guide', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'particleFire', user: req.user });
 });
 
 /* GET login */
