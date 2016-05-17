@@ -9,6 +9,8 @@ router.get('/style_guide', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(req.user);
+  
   res.render('index', { title: 'particleFire', user: req.user });
 });
 
@@ -24,22 +26,22 @@ router.get('/signin', function(req, res, next) {
 
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 router.post('/register', passport.authenticate('local-signup', {
-  successRedirect: '/',
-  failureRedirect: '/signin'
+  successRedirect: '/control-panel',
+  failureRedirect: '/'
   })
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
 router.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/',
+  successRedirect: '/control-panel',
   failureRedirect: '/signin'
   })
 );
 
 //logs user out of site, deleting them from the session, and returns to homepage
 router.get('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
+  var name = req.user.email;
+  console.log("LOGGIN OUT " + req.user.email)
   req.logout();
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";

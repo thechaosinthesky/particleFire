@@ -1,0 +1,38 @@
+.index-nav{
+	padding-top:20px;
+	padding-bottom:20px;
+
+	.navbar-brand{
+		font-size:36px;
+		line-height:auto;
+		height:auto;
+	}
+
+	.login-form{
+		label{
+			font-size: 1.5em;
+			margin-right: 10px;
+			margin-left: 10px;
+			color: $color3;
+		}
+	}
+}
+
+.index-splash{
+	padding-right:0;
+}
+
+.index-splash-content{
+	padding: 0 15px;
+}
+
+#index-signup-old{
+	background-color:#FFF;
+	color: $dark;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+
+	legend{
+		color: $dark;
+	}
+}

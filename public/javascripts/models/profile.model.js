@@ -1,4 +1,17 @@
 ParticleFire.Models.Profile = Backbone.Model.extend({
+
+  defaults: {
+    name: ''
+  },
+
+  url: function() {
+    var base = '/profiles';
+    if(this.id){
+      base += '/' + this.id;
+    }
+    return base;
+  },
+
   initialize: function() {
 
   }

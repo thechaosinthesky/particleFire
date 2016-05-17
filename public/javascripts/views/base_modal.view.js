@@ -3,6 +3,7 @@ ParticleFire.Views.Modal = Backbone.View.extend({
 	header: "Great template",
 	contentTemplate: _.template("Hi, How ya doin?"),
 	modalTemplate: _.template(ParticleFire.Templates.Modal),
+  type: 'form',
 
   events: {
   },
@@ -20,11 +21,16 @@ ParticleFire.Views.Modal = Backbone.View.extend({
   	this.$modalBody.html(this.contentTemplate(contentObj));
 
   	this.$content.modal();
+    this.$el = this.$content;
 
   	this.onRender();
   },
 
   onRender: function() {
 
+  },
+
+  close: function() {
+    this.$content.modal('hide');
   }
 });

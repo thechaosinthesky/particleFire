@@ -2,6 +2,7 @@ module.exports = function(grunt){
   grunt.initConfig({
     uglify: {
       'public/app.min.js': [
+        'public/vendor/javascripts/*.js',
         'public/javascripts/*.js',
         'public/javascripts/widgets/*.js',
         'public/javascripts/templates/*.js',

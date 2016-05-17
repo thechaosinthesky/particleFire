@@ -63,5 +63,6 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
   },
 
   addProfile: function() {
+    this.profileEditView = new ParticleFire.Views.ProfileEdit({model: new ParticleFire.Models.Profile()});
   }
 });

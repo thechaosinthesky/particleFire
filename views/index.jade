@@ -1,18 +1,86 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/bootstrap/superhero.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css')
+    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css')
+    link(rel='stylesheet', href='/stylesheets/styles.css')
+    link(rel="stylesheet", href="app.css")
 
-block content
-  .row
-    .col-xs-12
-      #profiles
-        .profile-tabs
-          button.btn.btn-primary.pull-right
-            i.fa.fa-plus-circle
-            | &nbsp; 
-            | PROFILE
-          ul.nav.nav-tabs.profile-list(role='tablist')
+  body
+    .navbar.navbar-default.index-nav
+      .container
+        .col-md-12
+          .navbar-header
+            a#brand.navbar-brand
+              span particle
+              span.white Fire
+              i.primary-color.fa.fa-fire
+          .navbar-collapse.collapse   
+            .navbar-text.navbar-right 
+              if(user)
+                ul.nav.navbar-nav.navbar-right
+                  li
+                    a(href='/logout') Logout    
+                p.navbar-text.navbar-right 
+                  | Welcome &nbsp;  
+                  = user.email
+                  |&nbsp; 
+              else
+                form.form-inline.login-form(action='/login', method='post')
+                  .form-group
+                    label(for='inputEmail') Email
+                    input#inputEmail.form-control(type='text', placeholder='Email', name='username')
+                  .form-group
+                    label(for='password') Password
+                    input#inputPassword.form-control(type='password', placeholder='Password', name='password')
+                  button.btn.btn-primary(type='submit') Login 
 
-          .profile-tab-content.tab-content
+    .container
+      .row
+        .col-md-8.index-splash
+          .index-splash-content
+            h2 Interact with your stuff using the internet
+            p 
+              | Welcome to partifleFire. You have everything you need to set up your control panel and start interacting with things.
 
-block scripts
-  script.
-    ParticleFire.initControlPanel();
+        #index-signup.col-md-4
+          .well
+            form.form-horizontal(action='/register', method='post')
+              fieldset
+                legend Sign Up
+                .form-group
+                  label.col-lg-2.control-label(for='inputEmail') Email
+                  .col-lg-10
+                    input#inputEmail.form-control(type='text', placeholder='Email', name='username')
+                .form-group
+                  label.col-lg-2.control-label(for='inputPassword') Password
+                  .col-lg-10
+                    input#inputPassword.form-control(type='password', placeholder='Password', name='password')
+                    .checkbox
+                      label
+                        input(type='checkbox')
+                        |  Remember me
+                .form-group
+                  .col-lg-12.text-center
+                    button.btn.btn-primary(type='submit') Submit
+
+    .footer-wrapper
+      .footer-content
+        p
+          | &copy; 2016
+          | &nbsp;
+          a.light-grey Brad Carlson
+
+    script(src='https://code.jquery.com/jquery-2.2.2.min.js', integrity='sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=', crossorigin='anonymous')
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js')
+    script(src='//cdn.jsdelivr.net/sparkjs/0.5.9/spark.min.js')
+    script(src='/app.min.js')
+
+    block scripts
+
+    
+    

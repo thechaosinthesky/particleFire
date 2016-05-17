@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Helper = require('../lib/Helpers.js');
+var passport = require('passport');
 
 var tempProfiles1 = [];
 
@@ -60,6 +62,13 @@ router.get('/', function(req, res, next) {
 router.get('/:profile_id/io', function(req, res, next) {
 	res.send(tempIOs);
   // res.render('index', { title: 'Express' });
+});
+
+router.post('/', function(req, res, next) {
+	Helper.addProfile(req, function(result){
+		req.login(result.user, function(err){});
+		res.status(result.status).send(result.obj);
+	});
 });
 
 module.exports = router;

@@ -16,6 +16,7 @@ var FacebookStrategy = require('passport-facebook');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var controlPanel = require('./routes/control-panel');
 var profiles = require('./routes/profiles');
 
 var app = express();
@@ -26,7 +27,7 @@ var Helper = require('./lib/Helpers.js');
 //===============PASSPORT===============
 // Passport session setup.
 passport.serializeUser(function(user, done) {
-  console.log("serializing " + user.username);
+  console.log("serializing " + user.email);
   done(null, user);
 });
 
@@ -38,12 +39,12 @@ passport.deserializeUser(function(obj, done) {
 // Use the LocalStrategy within Passport to login/”signin” users.
 passport.use('local-signin', new LocalStrategy(
   {passReqToCallback : true}, //allows us to pass back the request to the callback
-  function(req, username, password, done) {
-    Helper.localAuth(username, password)
+  function(req, email, password, done) {
+    Helper.localAuth(email, password)
     .then(function (user) {
       if (user) {
-        console.log("LOGGED IN AS: " + user.username);
-        req.session.success = 'You are successfully logged in ' + user.username + '!';
+        console.log("LOGGED IN AS: " + user.email);
+        req.session.success = 'You are successfully logged in ' + user.email + '!';
         done(null, user);
       }
       if (!user) {
@@ -60,17 +61,19 @@ passport.use('local-signin', new LocalStrategy(
 // Use the LocalStrategy within Passport to register/"signup" users.
 passport.use('local-signup', new LocalStrategy(
   {passReqToCallback : true}, //allows us to pass back the request to the callback
-  function(req, username, password, done) {
-    Helper.localReg(username, password)
+  function(req, email, password, done) {
+    console.log("GOOO");
+    console.log(email);
+    Helper.localReg(email, password)
     .then(function (user) {
       if (user) {
-        console.log("REGISTERED: " + user.username);
-        req.session.success = 'You are successfully registered and logged in ' + user.username + '!';
+        console.log("REGISTERED: " + user.email);
+        req.session.success = 'You are successfully registered and logged in ' + user.email + '!';
         done(null, user);
       }
       if (!user) {
         console.log("COULD NOT REGISTER");
-        req.session.error = 'That username is already in use, please try a different one.'; //inform user could not log them in
+        req.session.error = 'That email is already in use, please try a different one.'; //inform user could not log them in
         done(null, user);
       }
     })
@@ -131,6 +134,7 @@ app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/control-panel', controlPanel);
 app.use('/profiles', profiles);
 
 // catch 404 and forward to error handler
