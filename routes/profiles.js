@@ -55,8 +55,11 @@ var tempIOs = [
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.send(tempProfiles);
-  // res.render('index', { title: 'Express' });
+	Helper.listProfiles(req, function(result){
+		res.status(result.status).send(result.data);
+	});
+
+	// res.send(tempProfiles);
 });
 
 router.get('/:profile_id/io', function(req, res, next) {
@@ -67,7 +70,7 @@ router.get('/:profile_id/io', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	Helper.addProfile(req, function(result){
 		req.login(result.user, function(err){});
-		res.status(result.status).send(result.obj);
+		res.status(result.status).send(result.data);
 	});
 });
 
