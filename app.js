@@ -15,7 +15,7 @@ var GoogleStrategy = require('passport-google');
 var FacebookStrategy = require('passport-facebook');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var account = require('./routes/account');
 var controlPanel = require('./routes/control-panel');
 var profiles = require('./routes/profiles');
 
@@ -133,7 +133,7 @@ app.use(
 app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/account', account);
 app.use('/control-panel', controlPanel);
 app.use('/profiles', profiles);
 

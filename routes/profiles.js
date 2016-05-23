@@ -58,8 +58,6 @@ router.get('/', function(req, res, next) {
 	Helper.listProfiles(req, function(result){
 		res.status(result.status).send(result.data);
 	});
-
-	// res.send(tempProfiles);
 });
 
 router.get('/:profile_id/io', function(req, res, next) {
