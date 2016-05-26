@@ -47,7 +47,7 @@ ParticleFire.Templates.Profile = '
     <tr>\
       <td class="cell-io-name cell-io-new text-center">\
         <div class="io-new">\
-          <div id="newIO" class="btn-new-io btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;\
+          <div id="newIO" class="add-io btn-new-io btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;\
             I/O\
           </div>\
         </div>\

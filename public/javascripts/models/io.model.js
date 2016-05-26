@@ -1,4 +1,5 @@
 ParticleFire.Models.IO = Backbone.Model.extend({
+  idAttribute: "_id",
 
 	types:[
 		{"value":"trigger", "label":"Trigger"},
@@ -16,17 +17,30 @@ ParticleFire.Models.IO = Backbone.Model.extend({
     output_pin: ''
   },
 
+  url: function() {
+    return '/ios';
+  },
+
   initialize: function() {
 
+  },
+
+  triggerAction: function(value) {
+    $.ajax({
+      url: "/ios/" + this.id,
+      method: "POST",
+      body: {"value":value}
+    });
   }
 });
 
 ParticleFire.Collections.IO = Backbone.Collection.extend({
   model: ParticleFire.Models.IO,
   url: function() {
-    return '/profiles/' + this.profile_id + '/io';
+    return '/ios?profile_id=' + this.profile_id;
+    // return '/profiles/' + this.profile_id + '/io';
   },
-  initialize: function(options) {
+  initialize: function(array, options) {
   	this.profile_id = options.profile_id;
   }
 });

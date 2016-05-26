@@ -22,4 +22,11 @@ router.post('/:user_id/devices', function(req, res, next) {
 	});
 });
 
+/* GET user devices account. */
+router.get('/devices', function(req, res, next) {
+	Helper.listDevices(req, function(result){
+		res.status(result.status).send(result.data.devices);
+	});
+});
+
 module.exports = router;

@@ -49,7 +49,7 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
   renderProfile: function(model){
     var obj = model.toJSON();
     var profileContentId = "profile-" + model.id;
-    var active = (obj.id == this.profile_id);
+    var active = (model.id == this.profile_id);
     obj["profile_content_id"] = profileContentId;
     obj["classes"] = active ? 'active' : '';
     obj["active"] = active;

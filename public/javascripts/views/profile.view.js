@@ -8,7 +8,7 @@ ParticleFire.Views.Profile = Backbone.View.extend({
     this.model = options.model;
     this.active = false;
     this.collection = new ParticleFire.Collections.IO([], {profile_id: this.model.id});
-    this.listenTo(this.collection,'sync', this.render);
+    this.listenTo(this.collection,'sync', this.renderIOs);
     this.ioViews = [];
 
     this.templates = {
@@ -16,16 +16,47 @@ ParticleFire.Views.Profile = Backbone.View.extend({
       IO: _.template(ParticleFire.Templates.IO)
     }
 
-    this.renderLoader();
+    // this.renderLoader();
+
+    this.render();
   },
 
-  renderLoader: function() {
+  // renderLoader: function() {
+  //   var obj = this.model.toJSON();
+  //   this.$el.html(this.templates.profile(obj));
+  //   this.$IOList = this.$('.io-list');
+  // },
+
+
+
+  render: function() {
     var obj = this.model.toJSON();
     this.$el.html(this.templates.profile(obj));
     this.$IOList = this.$('.io-list');
+
+    if(obj.ios){
+      this.collection.set(obj.ios);
+
+  //     this.collection.set([{
+  //   "id": 1,
+  //   "name": "Garage",
+  //   "type": "trigger",
+  //   "device_name": "Aragon"
+  // },
+  // {
+  //   "id": 2,
+  //   "name": "Garage2",
+  //   "type": "trigger",
+  //   "device_name": "Aragon2"
+  // }]);
+
+      this.renderIOs();
+    }
   },
 
-  render: function() {
+  renderIOs: function() {
+console.log("REDER IOS");
+
     this.$IOList.html('');
     if(this.collection.length > 0){
       this.renderAllIOs();
@@ -56,6 +87,8 @@ ParticleFire.Views.Profile = Backbone.View.extend({
   },
 
   addIO: function() {
-
+    var obj = {};
+    obj.model = new ParticleFire.Models.IO({"profile_id":this.model.id});
+    this.ioEditView = new ParticleFire.Views.IOEdit(obj);
   }
 });

@@ -5,7 +5,18 @@ ParticleFire.Templates.IO = '
     <%= name %>\
     <span class="io-edit pull-right"><i class="fa fa-pencil"></i></span>\
   </td>\
-  <td id="<%= id %>" class="cell-io-content">Open/Closed</td>\
+  <td id="<%= _id %>" class="cell-io-content">Open/Closed</td>\
+</tr>\
+';
+
+ParticleFire.Templates.IO_trigger = '
+<tr>\
+  <td class="cell-io-name cell-io-edit active">\
+    <i class="fa fa-gg"></i>&nbsp;&nbsp;\
+    <%= name %>\
+    <span class="io-edit pull-right"><i class="fa fa-pencil"></i></span>\
+  </td>\
+  <td id="<%= _id %>" class="cell-io-content"><button type="button" class="io-trigger btn btn-danger"><i class="fa fa-lg fa-bolt danger"></i></button></td>\
 </tr>\
 ';
 
@@ -14,13 +25,13 @@ ParticleFire.Templates.IOEditContent = '
   <div class="form-group">\
     <label for="io-name" class="col-sm-2 control-label">I/O Name:</label>\
     <div class="col-sm-10">\
-      <input type="input" class="form-control" id="io-name" value="<%= name %>">\
+      <input type="input" class="form-control" id="io-name" name="name" value="<%= name %>">\
     </div>\
   </div>\
   <div class="form-group">\
     <label for="io-type" class="col-sm-2 control-label">I/O Type:</label>\
     <div class="col-sm-10">\
-      <select id="io-type" class="form-control io-types-select"></select>\
+      <select id="io-type" name="type" class="form-control io-types-select"></select>\
     </div>\
   </div>\
   <div class="io-type-fields">\
@@ -30,15 +41,10 @@ ParticleFire.Templates.IOEditContent = '
 
 ParticleFire.Templates.IOEditType_trigger = '
 <div class="form-group">\
-  <label for="io-device-name" class="col-sm-2 control-label">Device Name:</label>\
+  <label for="io-device-name" class="col-sm-2 control-label">Device:</label>\
   <div class="col-sm-10">\
-    <input type="input" class="form-control" id="io-device-name" value="<%= device_name %>">\
-  </div>\
-</div>\
-<div class="form-group">\
-  <label for="io-device-name" class="col-sm-2 control-label">Input ID:</label>\
-  <div class="col-sm-10">\
-    <input type="input" class="form-control" id="io-input-pin" value="<%= input_pin %>" placeholder="Example: A6">\
+    <select id="io-device" name="device_id" class="form-control io-devices-select">\
+    </select>\
   </div>\
 </div>\
 ';

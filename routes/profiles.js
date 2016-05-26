@@ -53,7 +53,7 @@ var tempIOs = [
 	}
 ];
 
-/* GET home page. */
+/* GET profiles list. */
 router.get('/', function(req, res, next) {
 	Helper.listProfiles(req, function(result){
 		res.status(result.status).send(result.data);

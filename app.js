@@ -18,6 +18,7 @@ var routes = require('./routes/index');
 var account = require('./routes/account');
 var controlPanel = require('./routes/control-panel');
 var profiles = require('./routes/profiles');
+var ios = require('./routes/ios');
 
 var app = express();
 
@@ -136,6 +137,7 @@ app.use('/', routes);
 app.use('/account', account);
 app.use('/control-panel', controlPanel);
 app.use('/profiles', profiles);
+app.use('/ios', ios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

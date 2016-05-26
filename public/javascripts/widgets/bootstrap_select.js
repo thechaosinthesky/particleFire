@@ -1,7 +1,10 @@
 var BootstrapSelect = Backbone.View.extend({
 
-  labelAttribute: 'label',
-  valueAttribute: 'value',
+  defaultOptions: {
+    labelAttribute: 'label',
+    valueAttribute: 'value'
+  },
+  
 
   events: {
   	"change": "onChange"
@@ -10,6 +13,7 @@ var BootstrapSelect = Backbone.View.extend({
   initialize: function(options) {
     this.values = options.values;
     this.value = options.value;
+    this.options = $.extend({}, this.defaultOptions, options);
 
     this.render();
   },
@@ -21,7 +25,7 @@ var BootstrapSelect = Backbone.View.extend({
     for(var x in this.values){
       var value = this.values[x];
       var selected = value == this.value;
-      this.$el.append('<option class="selection" ' + (selected ? 'selected' : '') + ' value="' + value[this.valueAttribute] + '">' + value[this.labelAttribute] + '</option>');
+      this.$el.append('<option class="selection" ' + (selected ? 'selected' : '') + ' value="' + value[this.options.valueAttribute] + '">' + value[this.options.labelAttribute] + '</option>');
     }
   },
 
