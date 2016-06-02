@@ -1,6 +1,7 @@
 doctype html
 html
   head
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title= title
     link(rel='stylesheet', href='/bootstrap/superhero.min.css')
     link(href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css')
@@ -11,13 +12,14 @@ html
   body
     .navbar.navbar-default.index-nav
       .container
-        .col-md-12
-          .navbar-header
-            a#brand.navbar-brand
-              span particle
-              span.white Fire
-              i.primary-color.fa.fa-fire
-          .navbar-collapse.collapse   
+        .row
+          .col-md-3
+            .navbar-header
+              a#brand.navbar-brand
+                span particle
+                span.white Fire
+                i.primary-color.fa.fa-fire
+          .col-md-9
             .navbar-text.navbar-right 
               if(user)
                 ul.nav.navbar-nav.navbar-right

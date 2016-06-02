@@ -22,7 +22,7 @@ var ios = require('./routes/ios');
 
 var app = express();
 
-var config = require('./config/config.js');
+var config = require('./config.js');
 var Helper = require('./lib/Helpers.js');
 
 //===============PASSPORT===============

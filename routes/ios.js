@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Helper = require('../lib/Helpers.js');
 var passport = require('passport');
+var Helper = require('../lib/Helpers.js');
+var ParticleAPI = require('../lib/APIHelper.js').ParticleAPI;
 
 /* GET io list. */
 router.get('/', function(req, res, next) {
@@ -20,8 +21,20 @@ router.post('/', function(req, res, next) {
 router.post('/:io_id', function(req, res, next) {
 
 	console.log("TRIGGER THE IO");
+	Helper.getIODevice(req, function(result){
+		var device = result.data;
+		ParticleAPI.triggerDevice(device.external_id, function(data){
+			console.log("Triggered DEVICES");
+			console.log(data);
+			res.status(result.status).send({});
+		});
+	});
 
-	res.status(200).send({});
+	// ParticleAPI.getDevices(function(data){
+	// 	console.log("GOT DEVICES");
+	// 	console.log(data);
+	// 	res.status(200).send({});
+	// });
 });
 
 module.exports = router;

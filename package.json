@@ -28,7 +28,9 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "q": "^1.4.1",
+    "request": "^2.72.0",
     "serve-favicon": "~2.3.0",
+    "simple-oauth2": "^0.7.0",
     "spark": "^1.0.0"
   }
 }
