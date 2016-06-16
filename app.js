@@ -13,6 +13,7 @@ var LocalStrategy = require('passport-local');
 var TwitterStrategy = require('passport-twitter');
 var GoogleStrategy = require('passport-google');
 var FacebookStrategy = require('passport-facebook');
+// var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var account = require('./routes/account');

@@ -6,6 +6,10 @@
 @import "profiles";
 @import "ios";
 
+.red{
+	background-color:red !important;
+}
+
 body {
   font: Helvetica, Arial, sans-serif;
   background-color:$very-dark;
@@ -37,6 +41,7 @@ body {
 .color5{ color:$color5 }
 .white{ color:#FFF }
 .light-grey{ color:$light-grey }
+.form-text-color{ color:$form-text-color }
 
 .border{ border: 1px solid $color1; }
 .border1{ border-color: $color1 }
@@ -44,6 +49,10 @@ body {
 .border3{ border-color: $color3 }
 .border4{ border-color: $color4 }
 .border5{ border-color: $color5 }
+
+.has-error .form-control, .has-error .form-control:focus {
+    border: 4px solid $danger-color;
+}
 
 .btn-dark{
 	background-color:$bg-accent;
@@ -77,3 +86,4 @@ body {
 .growl.growl-error {
 	background-color: #d9534f;
 }
+

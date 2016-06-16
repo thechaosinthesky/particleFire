@@ -64,7 +64,7 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
       },
       error: function(model, res){
         var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";
-       $.growl.error({message: error});
+        $.growl.error({message: error});
       }
     });
 

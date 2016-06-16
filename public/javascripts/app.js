@@ -34,5 +34,27 @@ var ParticleFire = {
 
 };
 
-// ParticleFire.Models.Profile = "test";
+// Handle backbone form validation, with popovers
+_.extend(Backbone.Validation.callbacks, {
+  valid: function(view, attr, selector) {
+    var input = view.$el.find("[name=" + attr + "]");
+    var formGroup = input.closest('.form-group');
+    if(formGroup.length){
+      formGroup.removeClass('has-error');
+    }
+    input.popover('destroy');
+  },
+  invalid: function(view, attr, error, selector) {
+    var input = view.$el.find("[name=" + attr + "]");
+    var formGroup = input.closest('.form-group');
+    if(formGroup.length){
+      formGroup.addClass('has-error');
+    }
+    var placement = input.attr('data-error-placement');
+    if(!placement){
+      placement = 'right';
+    }
+    input.popover({content:error, placement:placement}).popover('show');
+  }
+});
 

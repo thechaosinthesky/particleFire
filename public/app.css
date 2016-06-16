@@ -112,6 +112,9 @@
     display: block;
     width: auto; }
 
+.red {
+  background-color: red !important; }
+
 body {
   font: Helvetica, Arial, sans-serif;
   background-color: #272b30; }
@@ -154,6 +157,9 @@ body {
 .light-grey {
   color: #CCC; }
 
+.form-text-color {
+  color: #ebebeb; }
+
 .border {
   border: 1px solid #77b300; }
 
@@ -171,6 +177,9 @@ body {
 
 .border5 {
   border-color: #cc0000; }
+
+.has-error .form-control, .has-error .form-control:focus {
+  border: 4px solid #d9534f; }
 
 .btn-dark {
   background-color: #485563; }

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Helper = require('../lib/Helpers.js');
+var session = require('express-session');
 var passport = require('passport');
 
 var tempProfiles1 = [];

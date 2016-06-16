@@ -4,12 +4,14 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title= title
     link(rel='stylesheet', href='/bootstrap/superhero.min.css')
+    link(rel='stylesheet', href='/vendor/stylesheets/jquery.growl.css')
     link(href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css')
     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/stylesheets/styles.css')
     link(rel="stylesheet", href="app.css")
 
   body
+
     .navbar.navbar-default.index-nav
       .container
         .row
@@ -49,24 +51,25 @@ html
 
         #index-signup.col-md-4
           .well
-            form.form-horizontal(action='/register', method='post')
+            form.form-horizontal(id='register_form' action='/register', method='post')
               fieldset
                 legend Sign Up
                 .form-group
                   label.col-lg-2.control-label(for='inputEmail') Email
                   .col-lg-10
-                    input#inputEmail.form-control(type='text', placeholder='Email', name='username')
+                    input#inputEmail.form-control(type='text', placeholder='Email', name='username', data-error-placement='left')
                 .form-group
                   label.col-lg-2.control-label(for='inputPassword') Password
                   .col-lg-10
-                    input#inputPassword.form-control(type='password', placeholder='Password', name='password')
+                    input#inputPassword.form-control(type='password', placeholder='Password', name='password', data-error-placement='left')
                     .checkbox
-                      label
+                      label.form-text-color
                         input(type='checkbox')
                         |  Remember me
                 .form-group
                   .col-lg-12.text-center
-                    button.btn.btn-primary(type='submit') Submit
+                    button.btn.btn-primary.register-submit(type='button') Submit
+                    button.hidden(type='submit')
 
     .footer-wrapper
       .footer-content
@@ -79,10 +82,16 @@ html
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/backbone.validation/0.11.5/backbone-validation-min.js')
     script(src='//cdn.jsdelivr.net/sparkjs/0.5.9/spark.min.js')
     script(src='/app.min.js')
 
-    block scripts
+    script.
+      var registerForm = new ParticleFire.Views.Register({el: "#register_form"});
+
+    - if (error)
+      script.
+        $.growl.error({message: "#{error}"});  
 
     
     

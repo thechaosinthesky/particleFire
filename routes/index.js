@@ -9,9 +9,7 @@ router.get('/style_guide', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req.user);
-  
-  res.render('index', { title: 'particleFire', user: req.user });
+  res.render('index', { title: 'particleFire', user: req.user, error: res.locals.error });
 });
 
 /* GET login */
@@ -26,15 +24,16 @@ router.get('/signin', function(req, res, next) {
 
 //sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
 router.post('/register', passport.authenticate('local-signup', {
-  successRedirect: '/control-panel',
-  failureRedirect: '/'
+    successRedirect: '/control-panel',
+    failureRedirect: '/',
+    failureFlash: true
   })
 );
 
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
 router.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/control-panel',
-  failureRedirect: '/signin'
+    successRedirect: '/control-panel',
+    failureRedirect: '/signin'
   })
 );
 
