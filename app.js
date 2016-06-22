@@ -13,9 +13,12 @@ var LocalStrategy = require('passport-local');
 var TwitterStrategy = require('passport-twitter');
 var GoogleStrategy = require('passport-google');
 var FacebookStrategy = require('passport-facebook');
+var _ = require('underscore');
+var s = require("underscore.string");
 // var flash = require('connect-flash');
 
 var routes = require('./routes/index');
+var admin = require('./routes/admin');
 var account = require('./routes/account');
 var controlPanel = require('./routes/control-panel');
 var profiles = require('./routes/profiles');
@@ -25,6 +28,7 @@ var app = express();
 
 var config = require('./config.js');
 var Helper = require('./lib/Helpers.js');
+var protectedPaths = ['/control-panel','/account'];
 
 //===============PASSPORT===============
 // Passport session setup.
@@ -131,10 +135,34 @@ app.use(
   })
 );
 
+// Authorization middleware
+app.use(function(req, res, next) {
+  var path = req.path; 
+  if(s.startsWith(path, "/admin")){
+    if (req.user && req.user.admin){
+      next();
+    } else {
+       res.redirect("/");
+    }
+  }
+  else{
+    var isProtected = protectedPaths.reduce(function(previousValue, currentValue) {
+      return previousValue || (s.startsWith(path, currentValue));
+    }, false);
+
+    if (!isProtected || (isProtected && req.user)) {
+      next();
+    } else {
+       res.redirect("/");
+    }
+  }
+});
+
 // The static middleware must come after the sass middleware
 app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 app.use('/', routes);
+app.use('/admin', admin);
 app.use('/account', account);
 app.use('/control-panel', controlPanel);
 app.use('/profiles', profiles);

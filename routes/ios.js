@@ -18,6 +18,13 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+router.put('/:io_id', function(req, res, next) {
+	Helper.updateIO(req, function(result){
+		// req.login(result.user, function(err){});
+		res.status(result.status).send(result.data);
+	});
+});
+
 router.post('/:io_id', function(req, res, next) {
 
 	console.log("TRIGGER THE IO");

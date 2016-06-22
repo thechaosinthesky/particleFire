@@ -9,11 +9,11 @@ ParticleFire.Views.Modal = Backbone.View.extend({
   },
 
   initialize: function(options) {
-
     this.render();
   },
 
   render: function(contentObj) {
+    var that = this;
   	var obj = {};
   	obj.header = this.header;
   	this.$content = $(this.modalTemplate(obj));
@@ -23,10 +23,21 @@ ParticleFire.Views.Modal = Backbone.View.extend({
   	this.$content.modal();
     this.$el = this.$content;
 
+    this.$el.bind('keypress', function(e){
+      if (e.keyCode == 13) {
+        e.preventDefault();
+       that.onEnterPress(e);
+      }
+    });
+
   	this.onRender();
   },
 
   onRender: function() {
+
+  },
+
+  onEnterPress: function() {
 
   },
 

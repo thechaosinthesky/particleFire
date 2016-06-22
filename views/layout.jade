@@ -8,7 +8,7 @@ html
     link(href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css')
     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css')
     link(rel='stylesheet', href='/stylesheets/styles.css')
-    link(rel="stylesheet", href="app.css")
+    link(rel="stylesheet", href="/app.css")
 
   body.body-main
     .navbar.navbar-default.navbar-fixed-top
@@ -19,22 +19,28 @@ html
             span.white Fire
             i.primary-color.fa.fa-fire
         .navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/') Home
-            li
-              a(href="/account")
-                i.fa.fa-gear
-                | &nbsp;
-                | Settings
 
-          if(user)
+          if(current_user)
+            ul.nav.navbar-nav
+              li
+                a(href='/control-panel') Home
+              li
+                a(href="/account/#{current_user._id}")
+                  i.fa.fa-gear
+                  | &nbsp;
+                  | Settings
+              if(current_user.admin)
+                li
+                  a(href="/admin/users")
+                    i.fa.fa-user
+                    | &nbsp;
+                    | Users
             ul.nav.navbar-nav.navbar-right
               li
                 a(href='/logout') Logout    
             p.navbar-text.navbar-right 
               | Welcome &nbsp;  
-              = user.email
+              = current_user.email
               |&nbsp; 
           else
             ul.nav.navbar-nav.navbar-right
@@ -59,6 +65,13 @@ html
     script(src='/app.min.js')
 
     block scripts
+
+    - if(error)
+      script.
+        $.growl.error({message: "#{error}"}); 
+    - if(success)
+      script.
+        $.growl.success({message: "#{success}"}); 
 
     
     

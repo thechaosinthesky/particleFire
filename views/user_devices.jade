@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  if(current_user.admin)
+    .row
+      .col-xs-12
+        legend DEVICES
+        table.table.table-striped
+          tbody
+            if(devices)
+              each device in devices
+                tr
+                  td #{device.name} - #{device.external_id}
+          tfoot
+            tr
+              td
+                br
+                form(method='post', action="/admin/users/#{user._id}/devices" )
+                  .form-group
+                    input.form-control(type='text', placeholder='Device Name', name='name')
+                  .form-group
+                    input.form-control(type='text', placeholder='Device ID', name='external_id')
+                  button.btn.btn-primary(type='submit') ADD DEVICE
+
+block scripts
+  script.
+    ParticleFire.init();

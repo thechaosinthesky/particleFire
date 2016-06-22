@@ -5,6 +5,13 @@ ParticleFire.Models.Profile = Backbone.Model.extend({
     name: ''
   },
 
+  validation: {
+    name: {
+      required: true,
+      msg: 'Please enter a profile name'
+    }
+  },
+
   url: function() {
     var base = '/profiles';
     if(this.id){

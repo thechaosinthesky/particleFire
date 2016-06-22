@@ -1,24 +1,31 @@
-ParticleFire.Views.Register = Backbone.View.extend({
+ParticleFire.Views.Account = Backbone.View.extend({
 
   events: {
-  	"click .register-submit": "submit"
+  	"click .form-submit": "submit",
+    "keypress": "onKeyPress"
   },
 
   initialize: function(options) {
-    var user = new ParticleFire.Models.User({});
-    this.model = user;
-    // Backbone.Validation.bind(this);
-    // Backbone.Validation.bind(this, {
-    //   model: user
-    // });
-
-
+    if(options.model){
+      this.model = options.model;
+    }
+    else{
+      this.model = new ParticleFire.Models.User({});
+    }
+    
     this.render();
   },
 
   render: function() {
     _.bindFormView(this);
   	Backbone.Validation.bind(this);
+  },
+
+  onKeyPress: function(e){
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      this.submit(e);
+    }
   },
 
   submit: function(e) {

@@ -12,9 +12,22 @@ ParticleFire.Models.IO = Backbone.Model.extend({
   defaults: {
     name: '',
     type: null,
-    device_name: '',
-    input_pin: '',
-    output_pin: ''
+    device_id: ''
+  },
+
+  validation: {
+    name: {
+      required: true,
+      msg: 'Please enter a name.'
+    },
+    type: {
+      required: true,
+      msg: 'Please select an IO type.'
+    },
+    device_id: {
+      required: true,
+      msg: 'Please select a device.'
+    },
   },
 
   url: function() {

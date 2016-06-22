@@ -8,13 +8,13 @@ ParticleFire.Views.Profile = Backbone.View.extend({
     this.model = options.model;
     this.active = false;
     this.collection = new ParticleFire.Collections.IO([], {profile_id: this.model.id});
-    this.listenTo(this.collection,'sync', this.renderIOs);
+    this.listenTo(this.collection, 'sync', this.renderIOs);
     this.ioViews = [];
 
     this.templates = {
       profile: _.template(ParticleFire.Templates.Profile),
       IO: _.template(ParticleFire.Templates.IO)
-    }
+    };
 
     // this.renderLoader();
 
@@ -55,7 +55,6 @@ ParticleFire.Views.Profile = Backbone.View.extend({
   },
 
   renderIOs: function() {
-console.log("REDER IOS");
 
     this.$IOList.html('');
     if(this.collection.length > 0){
@@ -89,6 +88,7 @@ console.log("REDER IOS");
   addIO: function() {
     var obj = {};
     obj.model = new ParticleFire.Models.IO({"profile_id":this.model.id});
+    obj.profileView = this;
     this.ioEditView = new ParticleFire.Views.IOEdit(obj);
   }
 });

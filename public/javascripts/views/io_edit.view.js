@@ -15,6 +15,7 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
   },
 
   initialize: function(options) {
+    this.profileView = options.profileView;
     this.model = options.model;
     this.headerText = "New IO";
 
@@ -45,8 +46,6 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
 
     $('.modal.in form input,.modal.in form select').each(function(){
       var $input = $(this);
-      console.log("SAVE2");
-      console.log($input);
       var value = $input.val();
       console.log(value);
       if(value && $.trim(value) != ''){
@@ -59,8 +58,8 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     
     this.model.save([], {
       success: function(model, res){
+        that.profileView.collection.add(model, {merge:true});
         that.close();
-
       },
       error: function(model, res){
         var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";

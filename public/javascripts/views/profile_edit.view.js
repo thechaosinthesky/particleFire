@@ -22,22 +22,32 @@ ParticleFire.Views.ProfileEdit = ParticleFire.Views.Modal.extend({
 
   onRender: function() {
   	this.$el.find('#profile-name').focus();
+    _.bindFormView(this);
+    Backbone.Validation.bind(this);
   	this.delegateEvents();
+  },
+
+  onEnterPress: function(e) {
+    this.saveProfile();
   },
 
   saveProfile: function() {
     var that = this;
-    this.model.set({"name": this.$el.find('#profile-name').val()})
+    // this.model.set({"name": this.$el.find('#profile-name').val()}, {silent:true});
   	
-    this.model.save([], {
-    	success: function(){
-        that.close();
-    	},
-    	error: function(model, res){
-        var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";
-			 $.growl.error({message: error});
-    	}
-    });
+    this.model.validate();
+    if(this.model.isValid()){
+      this.model.save([], {
+      	success: function(model){
+          ParticleFire.App.profiles.add(model, {merge:true});
+          that.close();
+      	},
+      	error: function(model, res){
+          var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";
+  			 $.growl.error({message: error});
+      	}
+      });
+    }
   }
 
 });

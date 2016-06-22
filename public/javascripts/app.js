@@ -50,11 +50,17 @@ _.extend(Backbone.Validation.callbacks, {
     if(formGroup.length){
       formGroup.addClass('has-error');
     }
-    var placement = input.attr('data-error-placement');
+    var errorMethod = input.attr('data-error-method');
+    if(errorMethod == 'growl'){
+      $.growl.error({message: error});
+    }
+    else{
+      var placement = input.attr('data-error-placement');
     if(!placement){
-      placement = 'right';
+      placement = 'auto';
     }
     input.popover({content:error, placement:placement}).popover('show');
+    }
   }
 });
 

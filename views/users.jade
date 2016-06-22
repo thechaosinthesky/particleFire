@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  if(current_user.admin)
+    .row
+      .col-xs-12
+        legend ACCOUNTS
+        table.table.table-striped
+          thead
+            tr
+              th Email
+              th 
+              th 
+          tbody
+            if(users)
+              each user in users
+                tr
+                  td #{user.email}
+                  th 
+                    a.btn.btn-info(href="/account/#{user._id}") ACCOUNT
+                  th 
+                    a.btn.btn-info(href="/admin/users/#{user._id}/devices") DEVICES
+          tfoot
+            tr
+              td
+              td
+              td
+
+block script
+  script.
+    ParticleFire.init();

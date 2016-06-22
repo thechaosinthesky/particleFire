@@ -3,28 +3,56 @@ ParticleFire.Models.User = Backbone.Model.extend({
 
   defaults: {
     username: '',
-    password: ''
+    password: '',
+    password2: '',
+    pin: ''
   },
 
+  // newValidation: {
+  //   username: [
+  //     {
+  //   		required: true,
+  //   		msg: 'Please enter an email address'
+  //     },{
+  //   		pattern: 'email',
+  //   		msg: 'Please enter a valid email'
+  //     }
+  //   ],
+  //   password: [
+	 //    {
+	 //    	required: true,
+  // 			minLength: 8,
+  // 			maxLength: 25,
+  // 			msg: 'Please enter a password of at least 8 characters.'
+	 //    },
+	 //    {
+  // 			pattern: /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/,
+  // 			msg: 'Password must contain at least 1 letter and 1 number.'
+	 //    }
+  //   ]
+  // },
+
   validation: {
-    username: [{
-		required: true,
-		msg: 'Please enter an email address'
-    },{
-		pattern: 'email',
-		msg: 'Please enter a valid email'
-    }],
+    pin: {
+      required: false,
+      length: 4,
+      msg: 'Pin must be 4 characters.'
+    },
     password: [
-	    {
-	    	required: true,
-			minLength: 8,
-			maxLength: 25,
-			msg: 'Please enter a password of at least 8 characters.'
-	    },
-	    {
-			pattern: /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/,
-			msg: 'Password must contain at least 1 letter and 1 number.'
-	    }
+      {
+        required: false,
+        equalTo: 'password2',
+        msg: 'The passwords entered did not match.'
+      },
+      {
+        minLength: 8,
+        maxLength: 25,
+        msg: 'Please enter a password of at least 8 characters.'
+      },
+      {
+        pattern: /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/,
+        msg: 'Password must contain at least 1 letter and 1 number.'
+      }
     ]
   },
 
@@ -37,7 +65,20 @@ ParticleFire.Models.User = Backbone.Model.extend({
   },
 
   initialize: function() {
-
+    if(this.isNew()){
+      this.validation.password.unshift({
+        required: true,
+        msg: "Please enter a password."});
+      this.validation.username = [
+      {
+       required: true,
+       msg: 'Please enter an email address'
+      },{
+       pattern: 'email',
+       msg: 'Please enter a valid email'
+      }
+    ]
+    }
   }
 });
 

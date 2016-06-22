@@ -25,13 +25,13 @@ ParticleFire.Templates.IOEditContent = '
   <div class="form-group">\
     <label for="io-name" class="col-sm-2 control-label">I/O Name:</label>\
     <div class="col-sm-10">\
-      <input type="input" class="form-control" id="io-name" name="name" value="<%= name %>">\
+      <input type="input" class="form-control" id="io-name" name="name" data-error-method="growl" value="<%= name %>">\
     </div>\
   </div>\
   <div class="form-group">\
     <label for="io-type" class="col-sm-2 control-label">I/O Type:</label>\
     <div class="col-sm-10">\
-      <select id="io-type" name="type" class="form-control io-types-select"></select>\
+      <select id="io-type" name="type" data-error-method="growl" class="form-control io-types-select"></select>\
     </div>\
   </div>\
   <div class="io-type-fields">\
@@ -43,7 +43,7 @@ ParticleFire.Templates.IOEditType_trigger = '
 <div class="form-group">\
   <label for="io-device-name" class="col-sm-2 control-label">Device:</label>\
   <div class="col-sm-10">\
-    <select id="io-device" name="device_id" class="form-control io-devices-select">\
+    <select id="io-device" name="device_id" data-error-method="growl" class="form-control io-devices-select">\
     </select>\
   </div>\
 </div>\

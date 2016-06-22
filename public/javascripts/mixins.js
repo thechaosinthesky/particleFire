@@ -9,7 +9,7 @@ _.mixin({
   bindFormView: function(view){
   	if(view.model && view.$el){
   		for(var x in view.model.attributes){
-  			view.$el.find("[name=" + x + "]").change(function(){
+  			view.$el.find("[name=" + x + "]").bind("change keyup", function(){
   				var input = $(this);
   				var name = input.attr('name');
   				var obj = {};

@@ -57,18 +57,22 @@ html
                 .form-group
                   label.col-lg-2.control-label(for='inputEmail') Email
                   .col-lg-10
-                    input#inputEmail.form-control(type='text', placeholder='Email', name='username', data-error-placement='left')
+                    input#inputEmail.form-control(type='text', placeholder='Email', name='username')
                 .form-group
                   label.col-lg-2.control-label(for='inputPassword') Password
                   .col-lg-10
-                    input#inputPassword.form-control(type='password', placeholder='Password', name='password', data-error-placement='left')
+                    input#inputPassword.form-control(type='password', placeholder='Password', name='password')    
+                .form-group
+                  label.col-lg-2.control-label(for='inputPassword') Confirm Password
+                  .col-lg-10
+                    input#inputPassword2.form-control(type='password', placeholder='Password', name='password2')
                     .checkbox
                       label.form-text-color
                         input(type='checkbox')
                         |  Remember me
                 .form-group
                   .col-lg-12.text-center
-                    button.btn.btn-primary.register-submit(type='button') Submit
+                    button.btn.btn-primary.form-submit(type='button') Submit
                     button.hidden(type='submit')
 
     .footer-wrapper
@@ -87,7 +91,7 @@ html
     script(src='/app.min.js')
 
     script.
-      var registerForm = new ParticleFire.Views.Register({el: "#register_form"});
+      var registerForm = new ParticleFire.Views.Account({el: "#register_form"});
 
     - if (error)
       script.

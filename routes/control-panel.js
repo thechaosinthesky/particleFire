@@ -4,7 +4,7 @@ var passport = require('passport');
 
 /* GET control-panel */
 router.get('/', function(req, res, next) {
-  res.render('control-panel', { title: 'particleFire Control Panel', user: req.user });
+  res.render('control-panel', { title: 'particleFire Control Panel', current_user: req.user });
 });
 
 

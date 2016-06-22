@@ -61,14 +61,21 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/:profile_id/io', function(req, res, next) {
-	res.send(tempIOs);
-  // res.render('index', { title: 'Express' });
-});
+// router.get('/:profile_id/io', function(req, res, next) {
+// 	res.send(tempIOs);
+//   // res.render('index', { title: 'Express' });
+// });
 
 router.post('/', function(req, res, next) {
 	Helper.addProfile(req, function(result){
 		req.login(result.user, function(err){});
+		res.status(result.status).send(result.data);
+	});
+});
+
+router.put('/:profile_id', function(req, res, next) {
+	Helper.updateProfile(req, function(result){
+		// req.login(result.user, function(err){});
 		res.status(result.status).send(result.data);
 	});
 });

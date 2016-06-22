@@ -1,37 +1,28 @@
 extends layout
 
 block content
-  .row
-    .col-xs-12
-      legend DEVICES
-      table.table.table-striped
-        tbody
-          if(devices)
-            each device in devices
-              tr
-                td
-                  = device.external_id
-        tfoot
-          tr
-            td
-              br
-              form(method='post', action="/account/#{user._id}/devices" )
-                .form-group
-                  input#add-device.form-control(type='text', placeholder='Device ID', name='external_id')
-                button.btn.btn-primary(type='submit') ADD DEVICE
 
   .row
     .col-xs-12
-      form
+      form#account_form(method='post', action="/account/#{user._id}" )
         legend ACCOUNT SETTINGS
         .form-group
           label(for='exampleInputEmail1') Email address
-          input#exampleInputEmail1.form-control(type='email', placeholder='Email')
+          input#exampleInputEmail1.form-control(readonly='readonly', disabled='disabled', type='email', placeholder='Email', name='username', value="#{user.email}")
+        .form-group
+          label(for='exampleInputPassword1') Pin
+          input#pin.form-control(type='password', placeholder='1234', name='pin', maxlength="4", value="#{user.pin || ''}")
+          p.help-block
+            | Your pin can be used as an extra form of validation when triggering or interacting with your devices.
         .form-group
           label(for='exampleInputPassword1') Password
-          input#exampleInputPassword1.form-control(type='password', placeholder='Password')
-        button.btn.btn-default(type='submit') Submit
+          input#exampleInputPassword1.form-control(type='password', placeholder='Password', name='password')
+        .form-group
+          label(for='exampleInputPassword2') Re-enter Password
+          input#exampleInputPassword1.form-control(type='password', placeholder='Password', name='password2')
+        button.btn.btn-default.form-submit(type='submit') Submit
 
-block script
+block scripts
+
   script.
-    ParticleFire.init();
+    var accountForm = new ParticleFire.Views.Account({el: "#account_form", model: new ParticleFire.Models.User({id: "#{user._id}", _id: "#{user._id}", pin: "#{user.pin}", "username": "#{user.email}"})});

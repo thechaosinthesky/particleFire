@@ -15,7 +15,7 @@ ParticleFire.Templates.Modal = '
 ';
 
 ParticleFire.Templates.ProfileTab = '
-<li class="<%= classes %>" role="presentation">\
+<li class="<%= classes %>" data-profile-id="<%= profile_id %>" data-profile-view-id="<%= profile_content_id %>" role="presentation">\
 <a href="#<%= profile_content_id %>" aria-controls="#<%= profile_content_id %>" role="tab" data-toggle="tab">\
 <%= name %>\
 </a>\
@@ -63,7 +63,7 @@ ParticleFire.Templates.ProfileEditContent = '
   <div class="form-group">\
     <label for="profile-name" class="col-sm-2 control-label">Profile Name:</label>\
     <div class="col-sm-10">\
-      <input type="input" class="form-control" id="profile-name" name="name" value="<%= name %>">\
+      <input type="input" class="form-control" id="profile-name" name="name" data-error-method="growl" value="<%= name %>">\
     </div>\
   </div>\
 </form>\

@@ -1,7 +1,8 @@
 ParticleFire.Views.ControlPanel = Backbone.View.extend({
 
   events: {
-    "click .add-profile": "addProfile"
+    "click .add-profile": "addProfile",
+    "click .profile-list li": "activateProfile"
   },
 
   initialize: function(options) {
@@ -15,7 +16,7 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     this.templates = {
       profileTab: _.template(ParticleFire.Templates.ProfileTab),
       profileContent: _.template(ParticleFire.Templates.TabProfileContent)
-    }
+    };
 
     this.$profileList.html(ParticleFire.Templates.Loader_Profiles);
   },
@@ -44,12 +45,14 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     _.each(this.collection.models, function(model){
       that.renderProfile(model);
     }); 
+    this.delegateEvents();
   },
 
   renderProfile: function(model){
     var obj = model.toJSON();
     var profileContentId = "profile-" + model.id;
     var active = (model.id == this.profile_id);
+    obj["profile_id"] = model.id;
     obj["profile_content_id"] = profileContentId;
     obj["classes"] = active ? 'active' : '';
     obj["active"] = active;
@@ -62,7 +65,31 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
     }
   },
 
+  activateProfile: function(e) {
+    var $el = $(e.currentTarget);
+
+    if($el.hasClass('active')){
+      var profileId = $el.attr('data-profile-id');
+      var profile = this.collection.find(function(profile){
+        return profile.id = profileId;
+      });
+      console.log(profile);
+      this.editProfile(profile);
+    }
+    else{
+      var profileViewId = $el.attr('data-profile-view-id');
+      var profileView = _.find(this.profileViews, function(view){
+        return view.el.id == profileViewId;
+      });
+      profileView.activate();
+    }
+  },
+
   addProfile: function() {
     this.profileEditView = new ParticleFire.Views.ProfileEdit({model: new ParticleFire.Models.Profile()});
+  },
+
+  editProfile: function(model) {
+    this.profileEditView = new ParticleFire.Views.ProfileEdit({model: model});
   }
 });
