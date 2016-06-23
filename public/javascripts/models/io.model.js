@@ -31,7 +31,11 @@ ParticleFire.Models.IO = Backbone.Model.extend({
   },
 
   url: function() {
-    return '/ios';
+    var base = '/ios';
+    if(this.id){
+      base += '/' + this.id;
+    }
+    return base;
   },
 
   initialize: function() {

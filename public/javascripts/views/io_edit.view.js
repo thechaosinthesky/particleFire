@@ -12,6 +12,7 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
 
   events: {
     'click .btn-save': 'saveIO',
+    'click .btn-delete': 'deleteIO'
   },
 
   initialize: function(options) {
@@ -19,25 +20,32 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     this.model = options.model;
     this.headerText = "New IO";
 
-    if(this.model.id){
+    if(!this.model.isNew()){
       this.headerText = "Edit IO";
     }
 
     this.header = '<span><i class="fa fa-gg"></i>&nbsp;&nbsp;' + this.headerText + '</span>';
 
-    this.render(this.model.toJSON());
+    var obj = this.model.toJSON();
+    this.render(obj);
   },
 
   onRender: function(options) {
+    if(!this.model.isNew()){
+      $('.modal.in .btn-delete').removeClass('hidden');
+    }
     this.$ioFields = $('.modal.in .io-type-fields');
     this.typesDropdown = new BootstrapSelect({el: '.modal.in .io-types-select', values: this.model.types, value: this.model.get("type")});
     this.typesDropdown.bind('change', this.renderIOFields, this);
     this.delegateEvents();
+    if(!this.model.isNew()){
+      this.renderIOFields(this.model.get('type'), this.model.get('device_id'));
+    }
   },
 
-  renderIOFields: function(type) {
+  renderIOFields: function(type, value) {
     this.$ioFields.html(this.ioTypeTemplates[type](this.model.toJSON()));
-    this.deviceDropdown = new BootstrapSelect({el: '.modal.in .io-devices-select', values: ParticleFire.App.user.devices.toJSON(), labelAttribute:"external_id", valueAttribute:"_id"});
+    this.deviceDropdown = new BootstrapSelect({el: '.modal.in .io-devices-select', value: value, values: ParticleFire.App.user.devices.toJSON(), labelAttribute:"external_id", valueAttribute:"_id"});
   },
 
   saveIO: function() {
@@ -47,18 +55,17 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     $('.modal.in form input,.modal.in form select').each(function(){
       var $input = $(this);
       var value = $input.val();
-      console.log(value);
       if(value && $.trim(value) != ''){
         obj[$input.attr('name')] = value;
       }
     });
-
 
     this.model.set(obj);
     
     this.model.save([], {
       success: function(model, res){
         that.profileView.collection.add(model, {merge:true});
+        $.growl.success({message: "Succesfully saved."});
         that.close();
       },
       error: function(model, res){
@@ -67,6 +74,22 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
       }
     });
 
+  },
+
+  deleteIO: function() {
+    if(confirm("Are you sure you want to delete this IO")){
+      this.model.destroy({
+        success: function(model, res){
+          // that.profileView.collection.add(model, {merge:true});
+          $.growl.notice({message: "Succesfully deleted."});
+          that.close();
+        },
+        error: function(model, res){
+          var error = res.responseJSON ? res.responseJSON.error : "There was an error deleting. Please try again.";
+          $.growl.error({message: error});
+        }
+      });
+    }
   }
 
 });

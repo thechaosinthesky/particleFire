@@ -8,30 +8,6 @@ ParticleFire.Models.User = Backbone.Model.extend({
     pin: ''
   },
 
-  // newValidation: {
-  //   username: [
-  //     {
-  //   		required: true,
-  //   		msg: 'Please enter an email address'
-  //     },{
-  //   		pattern: 'email',
-  //   		msg: 'Please enter a valid email'
-  //     }
-  //   ],
-  //   password: [
-	 //    {
-	 //    	required: true,
-  // 			minLength: 8,
-  // 			maxLength: 25,
-  // 			msg: 'Please enter a password of at least 8 characters.'
-	 //    },
-	 //    {
-  // 			pattern: /[^\w\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))/,
-  // 			msg: 'Password must contain at least 1 letter and 1 number.'
-	 //    }
-  //   ]
-  // },
-
   validation: {
     pin: {
       required: false,
@@ -65,6 +41,7 @@ ParticleFire.Models.User = Backbone.Model.extend({
   },
 
   initialize: function() {
+    this.devices = new Backbone.Collection();
     if(this.isNew()){
       this.validation.password.unshift({
         required: true,
@@ -78,6 +55,9 @@ ParticleFire.Models.User = Backbone.Model.extend({
        msg: 'Please enter a valid email'
       }
     ]
+    }
+    else{
+      this.devices.url = '/account/' + this.id + '/devices';
     }
   }
 });

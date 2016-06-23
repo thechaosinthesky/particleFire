@@ -23,6 +23,10 @@ ParticleFire.Views.Modal = Backbone.View.extend({
   	this.$content.modal();
     this.$el = this.$content;
 
+    this.$el.find('.btn-cancel').click(function(){
+      that.$content.modal('hide');
+    });
+
     this.$el.bind('keypress', function(e){
       if (e.keyCode == 13) {
         e.preventDefault();

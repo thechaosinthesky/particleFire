@@ -12,6 +12,7 @@ ParticleFire.Views.IO = Backbone.View.extend({
   initialize: function(options) {
     this.model = options.model;
     this.$parentEl = options.$parentEl;
+    this.profileView = options.profileView;
 
     this.render();
   },
@@ -27,6 +28,7 @@ ParticleFire.Views.IO = Backbone.View.extend({
   editIO: function() {
   	var obj = {};
   	obj.model = this.model;
+    obj.profileView = this.profileView;
   	this.ioEditView = new ParticleFire.Views.IOEdit(obj);
   },
 

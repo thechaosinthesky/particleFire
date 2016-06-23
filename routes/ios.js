@@ -21,6 +21,9 @@ router.post('/', function(req, res, next) {
 router.put('/:io_id', function(req, res, next) {
 	Helper.updateIO(req, function(result){
 		// req.login(result.user, function(err){});
+		if(result.status != 200){
+			result.data.error = result.data.errors.join("  ");
+		}
 		res.status(result.status).send(result.data);
 	});
 });
@@ -42,6 +45,13 @@ router.post('/:io_id', function(req, res, next) {
 	// 	console.log(data);
 	// 	res.status(200).send({});
 	// });
+});
+
+router.delete('/:io_id', function(req, res, next) {
+	Helper.deleteIO(req, function(result){
+		req.login(req.user, function(err){});
+		res.statusStatus(result.status);
+	});
 });
 
 module.exports = router;

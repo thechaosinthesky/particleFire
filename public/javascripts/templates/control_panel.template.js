@@ -11,7 +11,7 @@ ParticleFire.Templates.Modal = '
           <h4 class="modal-title" id="modal"><%= header %></h4>\
       </div>\
       <div class="modal-body"> </div>\
-      <div class="modal-footer"> <div class="modal-buttons"> <button class="pull-right btn btn-primary btn-save">SAVE</button> <button class="pull-right btn btn-default btn-cancel">CANCEL</button> </div> </div> </div> </div> </div>\
+      <div class="modal-footer"> <div class="modal-buttons"> <button class="pull-right btn btn-primary btn-save">SAVE</button> <button class="pull-right btn btn-default btn-cancel">CANCEL</button> <button class="pull-right btn btn-danger btn-delete hidden">DELETE</button> </div> </div> </div> </div> </div>\
 ';
 
 ParticleFire.Templates.ProfileTab = '

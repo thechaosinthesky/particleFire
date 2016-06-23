@@ -2,7 +2,8 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
 
   events: {
     "click .add-profile": "addProfile",
-    "click .profile-list li": "activateProfile"
+    "click .profile-list li": "activateProfile",
+    "click .delete-profile": "deleteProfile"
   },
 
   initialize: function(options) {
@@ -24,6 +25,8 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
   render: function() {
     this.$profileList.html('');
     if(this.collection.length > 0){
+      $('.delete-profile').removeClass('hidden');
+      this.activeProfile = this.collection.at(0);
       if(!this.profile_id){
         this.profile_id = this.collection.at(0).id;
       }
@@ -68,12 +71,15 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
   activateProfile: function(e) {
     var $el = $(e.currentTarget);
 
+    var profileId = $el.attr('data-profile-id');
+    var profile = this.collection.find(function(profile){
+      return profile.id == profileId;
+    });
+    this.activeProfile = profile;
+    console.log($el.attr('data-profile-id'));
+    console.log(profile);
+
     if($el.hasClass('active')){
-      var profileId = $el.attr('data-profile-id');
-      var profile = this.collection.find(function(profile){
-        return profile.id = profileId;
-      });
-      console.log(profile);
       this.editProfile(profile);
     }
     else{
@@ -91,5 +97,21 @@ ParticleFire.Views.ControlPanel = Backbone.View.extend({
 
   editProfile: function(model) {
     this.profileEditView = new ParticleFire.Views.ProfileEdit({model: model});
+  },
+
+  deleteProfile: function() {
+    if(confirm("Are you sure you want to delete the profile: '" + this.activeProfile.get('name') + "'")){
+      this.activeProfile.destroy({
+        success: function(model, res){
+          // that.profileView.collection.add(model, {merge:true});
+          $.growl.notice({message: "Succesfully deleted."});
+          that.close();
+        },
+        error: function(model, res){
+          var error = res.responseJSON ? res.responseJSON.error : "There was an error deleting. Please try again.";
+          $.growl.error({message: error});
+        }
+      });
+    }
   }
 });

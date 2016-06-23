@@ -9,10 +9,14 @@ block content
             i.fa.fa-plus-circle
             | &nbsp; 
             | PROFILE
+          button.btn.btn-danger.pull-right.delete-profile.hidden
+            i.fa.fa-trash
           ul.nav.nav-tabs.profile-list(role='tablist')
 
           .profile-tab-content.tab-content
 
 block scripts
   script.
-    ParticleFire.initControlPanel();
+    ParticleFire.initControlPanel({
+      "user": new ParticleFire.Models.User({id: "#{current_user._id}", _id: "#{current_user._id}", pin: "#{current_user.pin}", "username": "#{current_user.email}"})
+    });
