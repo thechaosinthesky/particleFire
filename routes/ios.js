@@ -7,6 +7,28 @@ var ParticleAPI = require('../lib/APIHelper.js').ParticleAPI;
 /* GET io list. */
 router.get('/', function(req, res, next) {
 	Helper.listIOs(req, function(result){
+
+	
+		// for(var x in result.data){
+		// 	var io = result.data[x];
+		// 	console.log("FOUNDIO");
+		// 	console.log(io);
+
+		// 	Helper.getIODevice({params:{io_id: io._id}}, function(result){
+		// 		console.log("FOUND DEVICE");
+
+		// 		var device = result.data;
+		// 		console.log(device);
+		// 		var apiParams = {"external_id": device.external_id, "functionName": "digitalread", "arg": "D1"}
+		// 		ParticleAPI.readDevice(apiParams, function(data){
+		// 			console.log("Triggered DEVICES");
+		// 			console.log(data);
+		// 			// res.status(result.status).send(result.data);
+		// 		});
+		// 	});
+		// }
+
+
 		res.status(result.status).send(result.data);
 	});
 });
