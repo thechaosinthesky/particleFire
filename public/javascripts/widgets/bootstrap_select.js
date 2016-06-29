@@ -19,14 +19,14 @@ var BootstrapSelect = Backbone.View.extend({
   },
 
   render: function() {
-    // if(!this.value){
-    //   this.$el.append('<option class="selection"> - SELECT - </option>');
-    // }
+    if(!this.value){
+      this.$el.append('<option class="selection"> - SELECT - </option>');
+    }
     for(var x in this.values){
       var value = this.values[x];
       var optionValue = value[this.options.valueAttribute];
       var optionLabel = value[this.options.labelAttribute];
-      var selected = optionValue == this.value;
+      var selected = (optionValue == this.value) && this.value;
       this.$el.append('<option class="selection" ' + (selected ? 'selected' : '') + ' value="' + optionValue + '">' + optionLabel + '</option>');
     }
   },

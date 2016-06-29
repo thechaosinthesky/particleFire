@@ -2,17 +2,48 @@ ParticleFire.Models.IO = Backbone.Model.extend({
   idAttribute: "_id",
 
 	types:[
-		{"value":"trigger", "label":"Trigger"},
-		{"value":"toggle", "label":"Toggle"},
-		{"value":"power_buttons", "label":"Power Buttons"},
-		{"value":"reading", "label":"Value Reading"},
-		{"value":"video", "label":"Video Feed"}
+		// {"value":"trigger", "label":"Trigger"},
+		{
+      "name":"toggle", 
+      "label":"Toggle Switch",
+      "settings": {
+        "action":"triggerPulse", 
+        "statusFunction":"digitalRead",
+        "actionPin":"D0",  
+        "statusPin":"D1",
+        "onLabel":"On",
+        "offLabel":"Off"
+      },
+      "settingsValidation": {
+        'settings.action': {
+          required: true,
+          msg: 'Please enter an action name. The action is the function to execute on your device.'
+        }
+      }
+    },
+    {
+      "name":"status",
+      "label":"Status",
+      "settings": {
+        "statusFunction":"digitalRead",
+        "statusPin":"D1",
+        "onLabel":"On",
+        "offLabel":"Off"
+      },
+      "settingsValidation": {
+
+      }
+    }
+		// {"value":"power_buttons", "label":"Power Buttons"},
+		// {"value":"analog_output", "label":"Measurement"}
+		// {"value":"video", "label":"Video Feed"}
 	],
 
   defaults: {
     name: '',
     type: null,
-    device_id: ''
+    device_id: '',
+    settings: {}
   },
 
   validation: {
@@ -27,7 +58,7 @@ ParticleFire.Models.IO = Backbone.Model.extend({
     device_id: {
       required: true,
       msg: 'Please select a device.'
-    },
+    }
   },
 
   url: function() {
@@ -48,7 +79,38 @@ ParticleFire.Models.IO = Backbone.Model.extend({
       method: "POST",
       body: {"value":value}
     });
-  }
+  },
+
+  // types:[
+  //   {
+  //     "name":"garage", 
+  //     "label":"Garage Door",
+  //     "uiType":"toggle", 
+  //     "action":"triggerPulse", 
+  //     "statusFunction":"digitalRead",
+  //     "actionPin":"D0",  
+  //     "statusPin":"D1",
+  //     "onLabel":"On",
+  //     "offLabel":"Off"
+  //   },
+  //   {
+  //     "name":"status", 
+  //     "label":"Status",
+  //     "uiType":"status", 
+  //     "statusFunction":"digitalRead",
+  //     "statusPin":"D1",
+  //     "onLabel":"On",
+  //     "offLabel":"Off"
+  //   },
+  //   {
+  //     "name":"tempetature", 
+  //     "label":"Temperature",
+  //     "uiType":"analog_output", 
+  //     "statusFunction":"analogRead",
+  //     "statusPin":"A1",
+  //     "unitsLabel":"Degrees F"
+  //   }
+  // ]
 });
 
 ParticleFire.Collections.IO = Backbone.Collection.extend({

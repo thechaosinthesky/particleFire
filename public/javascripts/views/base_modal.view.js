@@ -30,7 +30,7 @@ ParticleFire.Views.Modal = Backbone.View.extend({
     this.$el.bind('keypress', function(e){
       if (e.keyCode == 13) {
         e.preventDefault();
-       that.onEnterPress(e);
+        that.onEnterPress(e);
       }
     });
 

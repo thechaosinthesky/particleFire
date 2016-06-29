@@ -68,10 +68,10 @@ html
 
     - if(error)
       script.
-        $.growl.notice({message: "#{error}"}); 
+        $.growl.error({message: "#{error}"}); 
     - if(success)
       script.
-        $.growl.success({message: "#{success}"}); 
+        $.growl.notice({message: "#{success}"}); 
 
     
     

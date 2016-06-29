@@ -37,7 +37,7 @@ var ParticleFire = {
 // Handle backbone form validation, with popovers
 _.extend(Backbone.Validation.callbacks, {
   valid: function(view, attr, selector) {
-    var input = view.$el.find("[name=" + attr + "]");
+    var input = view.$el.find("[name='" + attr + "']");
     var formGroup = input.closest('.form-group');
     if(formGroup.length){
       formGroup.removeClass('has-error');
@@ -45,7 +45,7 @@ _.extend(Backbone.Validation.callbacks, {
     input.popover('destroy');
   },
   invalid: function(view, attr, error, selector) {
-    var input = view.$el.find("[name=" + attr + "]");
+    var input = view.$el.find("[name='" + attr + "']");
     var formGroup = input.closest('.form-group');
     if(formGroup.length){
       formGroup.addClass('has-error');
