@@ -55,11 +55,19 @@ router.post('/:io_id', function(req, res, next) {
 	console.log("TRIGGER THE IO");
 	Helper.getIODevice(req, function(result){
 		var device = result.data;
-		ParticleAPI.triggerDevice(device.external_id, function(data){
-			console.log("Triggered DEVICES");
-			console.log(data);
-			res.status(result.status).send({});
+
+		console.log(req.body.actionFunction);
+
+		var apiParams = {"external_id": device.external_id, "functionName": req.body.actionFunction, "arg": req.body.actionPin}
+		ParticleAPI.postAction(apiParams, function(result){
+			res.status(result.status).send(result.data);
 		});
+
+		// ParticleAPI.triggerDevice(device.external_id, function(data){
+		// 	console.log("Triggered DEVICES");
+		// 	console.log(data);
+		// 	res.status(result.status).send({});
+		// });
 	});
 
 	// ParticleAPI.getDevices(function(data){
@@ -67,6 +75,17 @@ router.post('/:io_id', function(req, res, next) {
 	// 	console.log(data);
 	// 	res.status(200).send({});
 	// });
+});
+
+router.get('/:io_id/status', function(req, res, next) {
+	Helper.getIODevice(req, function(result){
+		var device = result.data;
+		var apiParams = {"external_id": device.external_id, "functionName": req.query.statusFunction, "arg": req.query.statusPin}
+		ParticleAPI.postAction(apiParams, function(result){
+			result.data.io_status = !(result.data && result.data.return_value);
+			res.status(result.status).send(result.data);
+		});
+	});
 });
 
 router.delete('/:io_id', function(req, res, next) {

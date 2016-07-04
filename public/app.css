@@ -100,6 +100,8 @@
         padding: 6px; }
         #ios tfoot tr td.cell-io-new .io-new .fa {
           color: #FFF !important; }
+        #ios tfoot tr td.cell-io-new .io-new .btn {
+          margin-left: 0; }
     #ios tfoot tr .cell-io-content {
       background: none; }
   #ios tr:nth-child(1) .cell-io-name .fa {
@@ -115,6 +117,14 @@
   #ios .btn-new-io {
     display: block;
     width: auto; }
+
+.io-type-fields .well {
+  padding-bottom: 0;
+  padding-top: 0;
+  margin-bottom: 0; }
+
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
+  background-color: #5cb85c; }
 
 .red {
   background-color: red !important; }

@@ -2,12 +2,13 @@ ParticleFire.Models.IO = Backbone.Model.extend({
   idAttribute: "_id",
 
 	types:[
-		// {"value":"trigger", "label":"Trigger"},
 		{
       "name":"toggle", 
       "label":"Toggle Switch",
       "settings": {
-        "action":"triggerPulse", 
+        "requirePin":true, 
+        "onAction":"triggerPulse", 
+        "offAction":"triggerPulse", 
         "statusFunction":"digitalRead",
         "actionPin":"D0",  
         "statusPin":"D1",
@@ -15,9 +16,33 @@ ParticleFire.Models.IO = Backbone.Model.extend({
         "offLabel":"Off"
       },
       "settingsValidation": {
-        'settings.action': {
+        'settings.onAction': {
           required: true,
-          msg: 'Please enter an action name. The action is the function to execute on your device.'
+          msg: 'Please enter the device action.'
+        },
+        'settings.offAction': {
+          required: true,
+          msg: 'Please enter the device action.'
+        },
+        'settings.statusFunction': {
+          required: true,
+          msg: 'Please enter the device status function.'
+        },
+        'settings.actionPin': {
+          required: true,
+          msg: 'Please enter the device pin to perform the action on.'
+        },
+        'settings.statusPin': {
+          required: true,
+          msg: 'Please enter the device pin to to read the status from.'
+        },
+        'settings.onLabel': {
+          required: true,
+          msg: 'Please enter the display label for \'on\' status.'
+        },
+        'settings.offLabel': {
+          required: true,
+          msg: 'Please enter the display label for \'off\' status.'
         }
       }
     },
@@ -73,44 +98,35 @@ ParticleFire.Models.IO = Backbone.Model.extend({
 
   },
 
-  triggerAction: function(value) {
+  triggerAction: function(obj) {
+    if(!obj){
+      obj = this.get('settings');
+    }
     $.ajax({
       url: "/ios/" + this.id,
       method: "POST",
-      body: {"value":value}
+      data: obj
     });
   },
 
-  // types:[
-  //   {
-  //     "name":"garage", 
-  //     "label":"Garage Door",
-  //     "uiType":"toggle", 
-  //     "action":"triggerPulse", 
-  //     "statusFunction":"digitalRead",
-  //     "actionPin":"D0",  
-  //     "statusPin":"D1",
-  //     "onLabel":"On",
-  //     "offLabel":"Off"
-  //   },
-  //   {
-  //     "name":"status", 
-  //     "label":"Status",
-  //     "uiType":"status", 
-  //     "statusFunction":"digitalRead",
-  //     "statusPin":"D1",
-  //     "onLabel":"On",
-  //     "offLabel":"Off"
-  //   },
-  //   {
-  //     "name":"tempetature", 
-  //     "label":"Temperature",
-  //     "uiType":"analog_output", 
-  //     "statusFunction":"analogRead",
-  //     "statusPin":"A1",
-  //     "unitsLabel":"Degrees F"
-  //   }
-  // ]
+  loadStatus: function(callback) {
+    var that = this;
+    var settings = this.get('settings');
+
+    $.ajax({
+      url: "/ios/" + this.id + "/status",
+      method: "GET",
+      data: {"statusFunction": settings["statusFunction"], "statusPin": settings["statusPin"]},
+      success: function(res){
+        that.set({state:res.io_status}, {silent:true});
+        callback();
+      },
+      error: function(){
+        var error = "Error reading the IO Status.";
+        $.growl.error({message: error});
+      }
+    });
+  }
 });
 
 ParticleFire.Collections.IO = Backbone.Collection.extend({

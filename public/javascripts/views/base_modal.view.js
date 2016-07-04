@@ -16,6 +16,7 @@ ParticleFire.Views.Modal = Backbone.View.extend({
     var that = this;
   	var obj = {};
   	obj.header = this.header;
+    obj.submitLabel = contentObj.submitLabel ? contentObj.submitLabel : "SAVE"
   	this.$content = $(this.modalTemplate(obj));
   	this.$modalBody = this.$content.find('.modal-body');
   	this.$modalBody.html(this.contentTemplate(contentObj));

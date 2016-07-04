@@ -57,6 +57,10 @@
 					.fa{
 						color:#FFF !important;
 					}
+
+					.btn{
+						margin-left:0;
+					}
 				}
 			}
 			
@@ -86,4 +90,16 @@
 		display:block;
 		width:auto;
 	}
+}
+
+.io-type-fields{
+	.well{
+		padding-bottom:0;
+		padding-top:0;
+		margin-bottom:0;
+	}
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary{
+	background-color: $success-color;
 }

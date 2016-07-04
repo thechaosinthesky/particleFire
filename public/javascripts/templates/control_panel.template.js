@@ -11,7 +11,7 @@ ParticleFire.Templates.Modal = '
           <h4 class="modal-title" id="modal"><%= header %></h4>\
       </div>\
       <div class="modal-body"> </div>\
-      <div class="modal-footer"> <div class="modal-buttons"> <button class="pull-right btn btn-primary btn-save">SAVE</button> <button class="pull-right btn btn-default btn-cancel">CANCEL</button> <button class="pull-right btn btn-danger btn-delete hidden">DELETE</button> </div> </div> </div> </div> </div>\
+      <div class="modal-footer"> <div class="modal-buttons"> <button class="pull-right btn btn-primary btn-save"><%= submitLabel %></button> <button class="pull-right btn btn-default btn-cancel">CANCEL</button> <button class="pull-right btn btn-danger btn-delete hidden">DELETE</button> </div> </div> </div> </div> </div>\
 ';
 
 ParticleFire.Templates.ProfileTab = '
@@ -64,6 +64,17 @@ ParticleFire.Templates.ProfileEditContent = '
     <label for="profile-name" class="col-sm-2 control-label">Profile Name:</label>\
     <div class="col-sm-10">\
       <input type="input" class="form-control" id="profile-name" name="name" data-error-method="growl" value="<%= name %>">\
+    </div>\
+  </div>\
+</form>\
+';
+
+ParticleFire.Templates.PinVerification = '
+<form class="form-horizontal">\
+  <div class="form-group">\
+    <label for="profile-name" class="col-sm-2 control-label">Pin:</label>\
+    <div class="col-sm-10">\
+      <input type="password" maxlength="4" class="form-control" id="user-pin" name="pin" data-error-method="growl" value="">\
     </div>\
   </div>\
 </form>\

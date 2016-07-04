@@ -33,14 +33,14 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
 
   onRender: function(options) {
     var device_id = null;
+    this.$ioFields = $('.modal.in .io-type-fields');
     if(!this.model.isNew()){
       $('.modal.in .btn-delete').removeClass('hidden');
       device_id = this.model.get('device_id');
       this.renderIOFields(this.model.get('type'));
     }
-    this.$ioFields = $('.modal.in .io-type-fields');
 
-    this.model.devaultValidation = this.model.validation;
+    this.model.defaultValidation = this.model.validation;
     _.bindFormView(this);
     Backbone.Validation.bind(this);
 
@@ -56,21 +56,13 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     });
 
     this.model.set({"settings": type.settings}, {silent:true});
-    this.model.validation.settings = type.settingsValidation;
 
-
-
-    // console.log("TESTTEST");
-    // console.log(type);
-    // console.log(this.model.toJSON());
     this.$ioFields.html(this.ioTypeTemplates[typeName](type.settings));
 
-
-    this.model.validation = $.extend({}, this.model.defaultValidation, type.settingsValidation)
+    Backbone.Validation.unbind(this)
+    this.model.validation = $.extend({}, this.model.defaultValidation, type.settingsValidation);
     this.bindSettingsForm();
     Backbone.Validation.bind(this);
-
-    // this.deviceDropdown = new BootstrapSelect({el: '.modal.in .io-devices-select', value: value, values: ParticleFire.App.user.devices.toJSON(), labelAttribute:"external_id", valueAttribute:"_id"});
   },
 
   bindSettingsForm: function() {
@@ -79,9 +71,10 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
         this.$ioFields.find("[name='settings." + x + "']").bind("change keyup", function(){
           var input = $(this);
           var name = input.attr('name');
-          var obj = that.model.get('settings');
-          obj[name] = $(this).val();
-          that.model.set({"settings": obj}, {silent:true});
+          name = name.split('.')[1];
+          var settings = that.model.get('settings');
+          settings[name] = $(this).val();
+          that.model.set({"settings": settings}, {silent:true});
         });
       }
   },
@@ -99,21 +92,19 @@ ParticleFire.Views.IOEdit = ParticleFire.Views.Modal.extend({
     // });
     // this.model.set(obj);
 
-console.log(this.model);
-
     this.model.validate();
     if(this.model.isValid()){
-      // alert('valid');
-      // this.model.save([], {
-      //   success: function(model){
-      //     ParticleFire.App.profiles.add(model, {merge:true});
-      //     that.close();
-      //   },
-      //   error: function(model, res){
-      //     var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";
-      //    $.growl.error({message: error});
-      //   }
-      // });
+      this.model.save([], {
+        success: function(model, res){
+          that.profileView.collection.add(model, {merge:true});
+          $.growl.notice({message: "Succesfully saved."});
+          that.close();
+        },
+        error: function(model, res){
+          var error = res.responseJSON ? res.responseJSON.error : "There was an error saving. Please try again.";
+          $.growl.error({message: error});
+        }
+      });
     }
     
     // this.model.save([], {

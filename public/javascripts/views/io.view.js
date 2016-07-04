@@ -1,28 +1,54 @@
 ParticleFire.Views.IO = Backbone.View.extend({
 
   typeTemplates: {
-    trigger: _.template(ParticleFire.Templates.IO_trigger)
+    loader: _.template(ParticleFire.Templates.IO_loader),
+    trigger: _.template(ParticleFire.Templates.IO_trigger),
+    toggle: _.template(ParticleFire.Templates.IO_toggle)
   },
 
-  events: {
+  events: {},
+
+  baseEvents: {
   	"click .cell-io-edit": "editIO",
-    "click .io-trigger": "triggerAction"
+    "click .io-action": "startAction"
   },
 
   initialize: function(options) {
     this.model = options.model;
     this.$parentEl = options.$parentEl;
     this.profileView = options.profileView;
+    this.type = this.model.get("type");
 
-    this.render();
+    this.el = this.typeTemplates['loader'](this.model.toJSON());
+    this.$el = $(this.el);
+    this.$parentEl.append(this.$el);
+    this.$io = this.$el.find("#io-" + this.model.id);
+
+    if(this.model.get('settings')["statusFunction"]){
+      var that = this;
+
+      this.model.set({state:true}, {silent:true});
+      this.model.loadStatus(function(){
+        that.render();
+      });
+    }
+    else{
+      this.render();
+    }
   },
 
   render: function() {
+    console.log("RENDERNOW");
   	var obj = this.model.toJSON();
-  	this.el = this.typeTemplates[this.model.get('type')](obj);
-  	this.$el = $(this.el);
-  	this.$parentEl.append(this.$el);
+    this.$io.html(this.typeTemplates[this.model.get('type')](obj));
+    this.events = $.extend({}, this.baseEvents, this.events);
   	this.delegateEvents();
+
+    this.onRender();
+  },
+
+  onRender: function() {
+
   },
 
   editIO: function() {
@@ -32,8 +58,23 @@ ParticleFire.Views.IO = Backbone.View.extend({
   	this.ioEditView = new ParticleFire.Views.IOEdit(obj);
   },
 
-  triggerAction: function() {
-    this.model.triggerAction();
+  startAction: function() {
+    var that = this;
+
+    if(this.model.get('settings')['requirePin']){
+      var pinVerification = new ParticleFire.Views.PinVerification({verifyEvent:"io.submitAction", verifyObject: this});
+
+      pinVerification.on('pinVerification:success', function(){
+        that.submitAction();
+      });
+    }
+    else{
+      that.submitAction();
+    }
+  },
+
+  submitAction: function() {
+    
   }
 
 });

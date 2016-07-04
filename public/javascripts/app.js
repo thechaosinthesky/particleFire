@@ -45,6 +45,8 @@ _.extend(Backbone.Validation.callbacks, {
     input.popover('destroy');
   },
   invalid: function(view, attr, error, selector) {
+    console.log("OFUDN INVALID");
+    console.log(attr);
     var input = view.$el.find("[name='" + attr + "']");
     var formGroup = input.closest('.form-group');
     if(formGroup.length){

@@ -54,4 +54,28 @@ router.get('/:user_id/devices', function(req, res, next) {
 	});
 });
 
+router.put('/verifyPin', function(req, res, next) {
+	// Helper.verifyPin(req, function(result){
+	// 	res.status(result.status).send(result.data);
+	// });
+
+// console.log("HIHI");
+
+// console.log(req.body);
+// console.log(req.user);
+var pin = req.body.pin;
+// console.log(req.user && pin && pin.length === 4);
+// console.log(pin);
+// console.log(req.user.pin == pin);
+var status =  (req.user && pin && pin.length === 4 && req.user.pin == pin) ? "200" : "401";
+
+console.log("SEnD STATUS");
+console.log(status);
+
+// console.log(req.user);
+//   console.log(params.pin);
+
+res.sendStatus(status);
+});
+
 module.exports = router;

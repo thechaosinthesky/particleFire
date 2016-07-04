@@ -79,7 +79,7 @@ ParticleFire.Views.Profile = Backbone.View.extend({
   },
 
   renderIO: function(model){
-    this.ioViews.push(new ParticleFire.Views.IO({model: model, $parentEl:this.$IOList, profileView: this}));
+    this.ioViews.push(new ParticleFire.Views["IO_" + model.get('type')]({model: model, $parentEl:this.$IOList, profileView: this}));
 
     // var obj = model.toJSON();
     // this.$IOList.append(this.templates.IO(obj));
