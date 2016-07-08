@@ -32,14 +32,32 @@ var protectedPaths = ['/control-panel','/account'];
 
 //===============PASSPORT===============
 // Passport session setup.
-passport.serializeUser(function(user, done) {
-  console.log("serializing " + user.email);
-  done(null, user);
+passport.serializeUser(function(req, user, done) {
+  console.log("serializing " + user);
+  
+  Helper.updateSessionKey(req, user, function(user){
+    console.log(user);
+    done(null, user);
+  });
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function(req, obj, done) {
   console.log("deserializing " + obj);
-  done(null, obj);
+
+console.log(session);
+
+  if(req.session.passport && req.session.passport.user){
+    if(req.session.passport.user.sessionDeviceKey !== Helper.sessionDeviceKey(req)){
+      req.logout();
+      req.session.error = 'You are currently logged in with another device. Please log in again.';
+      done(null, null);
+    }
+    else{
+      done(null, obj);
+    }
+  }
+
+  // done(null, obj);
 });
 
 // Use the LocalStrategy within Passport to login/”signin” users.
@@ -107,6 +125,52 @@ app.use(session({secret: 'beanpole', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Session device browser auth middleware
+// app.use(function(req, res, next) {
+//   if(req.session.passport){
+//     console.log("WAAAAAAAAA");
+
+//     console.log(req.session.deviceKey);
+
+//     console.log(Helper.deviceKey(req));
+
+//     if(req.session.deviceKey === Helper.deviceKey(req)){
+//       next();
+//     }
+//     else{
+//       req.logout();
+//       res.locals.error = 'You are currently logged in with another device. Please log in again.';
+//       res.redirect('/');
+//     }
+//   }
+//   else{
+//     next();
+//   }
+// });
+
+// Authorization middleware
+app.use(function(req, res, next) {
+  var path = req.path; 
+  if(s.startsWith(path, "/admin")){
+    if (req.user && req.user.admin){
+      next();
+    } else {
+       res.redirect("/");
+    }
+  }
+  else{
+    var isProtected = protectedPaths.reduce(function(previousValue, currentValue) {
+      return previousValue || (s.startsWith(path, currentValue));
+    }, false);
+
+    if (!isProtected || (isProtected && req.user)) {
+      next();
+    } else {
+       res.redirect("/");
+    }
+  }
+});
+
 // Session-persisted message middleware
 app.use(function(req, res, next){
   var err = req.session.error,
@@ -134,29 +198,6 @@ app.use(
     debug: true,
   })
 );
-
-// Authorization middleware
-app.use(function(req, res, next) {
-  var path = req.path; 
-  if(s.startsWith(path, "/admin")){
-    if (req.user && req.user.admin){
-      next();
-    } else {
-       res.redirect("/");
-    }
-  }
-  else{
-    var isProtected = protectedPaths.reduce(function(previousValue, currentValue) {
-      return previousValue || (s.startsWith(path, currentValue));
-    }, false);
-
-    if (!isProtected || (isProtected && req.user)) {
-      next();
-    } else {
-       res.redirect("/");
-    }
-  }
-});
 
 // The static middleware must come after the sass middleware
 app.use(express.static( path.join( __dirname, 'public' ) ) );
